@@ -2,7 +2,7 @@ package com.seph_worker.worker.core.entity.RoleModuleUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seph_worker.worker.core.dto.MapToJsonConverter;
-import com.seph_worker.worker.core.entity.Empleados.CatEmpleado;
+import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -71,6 +71,6 @@ public class CoreUser {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cat_empleado_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private CatEmpleado catEmpleado;
+    private TabEmpleado catEmpleado;
 
 }

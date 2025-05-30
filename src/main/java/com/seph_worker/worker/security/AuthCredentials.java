@@ -7,7 +7,5 @@ import lombok.Data;
 public class AuthCredentials {
 
     private String user;
-    private String usuario;
-    private String proyecto;
     private String password;
 }

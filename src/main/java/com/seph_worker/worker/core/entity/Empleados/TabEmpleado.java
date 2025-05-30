@@ -13,9 +13,9 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name="cat_empleados")
+@Table(name="tab_empleado")
 @Where(clause = "deleted = false")
-public class CatEmpleado {
+public class TabEmpleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +37,6 @@ public class CatEmpleado {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "cat_sexo_id")
-    private Integer sexoId;
-
-    @Column(name = "cat_estado_civil_id")
-    private Integer estadoCivilId;
-
     @Column(name = "qnaini")
     private Integer qnaini;
 
@@ -52,25 +46,33 @@ public class CatEmpleado {
     @Column(name = "qnasep")
     private Integer qnasep;
 
-    @Column(name = "cat_nivel_academico_id")
-    private Integer nivelAcademicoId;
-
     @Column(name = "perfil")
     private String perfil;
 
     @Column(name = "nss")
     private String nss;
 
-    @Column(name = "cat_regimen_id")
-    private Integer regimenId;
-
-    @Column(name = "cat_tipo_contratacion")
-    private Integer tipoContratacionId;
-
     @Basic
     @Column(name = "nivel", columnDefinition = "json")
     @Convert(converter = ListToJsonConverter.class)
     private List<Integer> nivel;
+
+    //----------------------------------------->
+    @Column(name = "cat_sexo_id")
+    private Integer sexoId;
+
+    @Column(name = "cat_estado_civil_id")
+    private Integer estadoCivilId;
+
+    @Column(name = "cat_regimen_id")
+    private Integer regimenId;
+
+    @Column(name = "cat_tipo_contratacion_id")
+    private Integer tipoContratacionId;
+
+    @Column(name = "cat_nivel_academico_id")
+    private Integer nivelAcademicoId;
+    //----------------------------------------->
 
     @Column(name = "activo")
     private Boolean activo;
@@ -95,4 +97,6 @@ public class CatEmpleado {
 
     @Column(name = "deleted")
     private Boolean deleted;
+
+
 }

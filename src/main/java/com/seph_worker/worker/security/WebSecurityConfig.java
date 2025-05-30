@@ -44,11 +44,12 @@ public class WebSecurityConfig {
 
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll() // Permitir acceso a /login
+                .requestMatchers(HttpMethod.POST, "/users/getToken").permitAll() // Permitir acceso a /login
                 .requestMatchers(HttpMethod.POST, "/users/sendChangePassword").permitAll() // Permitir acceso a /login
                 .requestMatchers(HttpMethod.POST, "/users/changePasswordRecovery").permitAll() // Permitir acceso a /login
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permitir OPTIONS para CORS
                 .requestMatchers(
-                        "/swagger-ui/**", "/swagger-ui.html","/swagger/**" // si quieres asegurar también este path
+                        "/swagger-ui/**", "/swagger-ui.html",  "/v3/api-docs/**","/swagger/**" // si quieres asegurar también este path
                 ).permitAll()
                 .requestMatchers("/*.*").permitAll() // Permitir el acceso a archivos estáticos
                 .anyRequest().authenticated() // Proteger cualquier otra solicitud
