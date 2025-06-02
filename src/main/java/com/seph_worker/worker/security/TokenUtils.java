@@ -17,13 +17,12 @@ public class TokenUtils {
     //private final static Long ACCESS_TOKEN_EXPIRES_IN = 30L; // Duración en segundos
    private final static Long ACCESS_TOKEN_EXPIRES_IN = 10_800L;
 
-    public static String createToken(CoreUser user) {
+    public static String createToken(Integer userId) {
         long expirationTime = ACCESS_TOKEN_EXPIRES_IN * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
         return Jwts.builder()
-                .setSubject(user.getUsername())   // guarda el username en subject
-                .claim("userId", user.getId())    // guarda id como claim simple
+                .setSubject(userId.toString())   // guarda el username en subject
                 .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN.getBytes()))
                 .compact();

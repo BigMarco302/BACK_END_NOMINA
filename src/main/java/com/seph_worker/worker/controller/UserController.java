@@ -1,6 +1,7 @@
 package com.seph_worker.worker.controller;
 
 
+import com.seph_worker.worker.core.dto.SessionUser;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 
 import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +37,7 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+    private final SessionUser sessionUser;
 
 
     @PostMapping("/getToken")
@@ -46,8 +49,8 @@ public class UserController {
 
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         CoreUser user =    userRepository.findOneByUsername(userDetails.getUsername())
-                .orElseThrow(()-> new ResourceNotFoundException(""));
-        String token = TokenUtils.createToken(user);
+                .orElseThrow(()-> new ResourceNotFoundException("No se enontro al usuario"));
+        String token = TokenUtils.createToken(user.getId());
 
         return ResponseEntity.ok(Map.of("token", token));
     }
@@ -73,10 +76,8 @@ public class UserController {
     @PostMapping("/validateToken")
     @Operation(summary = "Validacion de token enviado por correo")
     public WebServiceResponse validateToken(
-            @RequestHeader("Authorization") String barer,
             @RequestHeader String token){
-        Integer userId =  TokenUtils.getUserFromToken(barer);
-    return userService.validateToken(token,userId);
+    return userService.validateToken(token,sessionUser.getUser());
     }
 
     //POST------------------------------->
@@ -89,10 +90,8 @@ public class UserController {
     @PostMapping("/changePassword")
     @Operation(summary = "Cambio de contraseña del usuario")
     public WebServiceResponse changePassword(
-            @RequestHeader("Authorization") String barer,
             @RequestHeader("password") String password){
-        Integer userId =  TokenUtils.getUserFromToken(barer);
-        return (userService.changePassword(password,userId));
+        return (userService.changePassword(password,sessionUser.getUser()));
     }
 
     @PostMapping("/sendChangePassword")

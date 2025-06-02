@@ -67,11 +67,9 @@ public class UserService {
     }
 
     @Transactional
-    public WebServiceResponse validateToken (String token,Integer userId){
-        CoreUser user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("No se encontro al usuario"));
+    public WebServiceResponse validateToken (String token,CoreUser user){
 
-        Map<String,Object> userToken  = new HashMap<>(tokensVerifyRepository.getTokenCurrent(userId));
+        Map<String,Object> userToken  = new HashMap<>(tokensVerifyRepository.getTokenCurrent(user.getId()));
 
         if(userToken == null || userToken.isEmpty()) throw new ResourceNotFoundException("No se encontro token");
 
@@ -137,10 +135,7 @@ public class UserService {
     }
 
 
-    public WebServiceResponse changePassword(String password, Integer userId){
-        CoreUser user = userRepository.findById(userId)
-                .orElseThrow(()-> new ResourceNotFoundException("No se encontro al usuario"));
-
+    public WebServiceResponse changePassword(String password,CoreUser user){
         if(!user.getIsPassword() ){
             user.setIsPassword(TRUE);
             user.setPass(new BCryptPasswordEncoder().encode(password));
