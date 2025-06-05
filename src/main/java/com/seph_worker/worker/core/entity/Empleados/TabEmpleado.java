@@ -1,7 +1,14 @@
 package com.seph_worker.worker.core.entity.Empleados;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seph_worker.worker.core.dto.ListToJsonConverter;
+import com.seph_worker.worker.core.entity.CatEstadoCivil.CatEstadoCivil;
+import com.seph_worker.worker.core.entity.CatNivelAcademico.CatNivelAcademico;
+import com.seph_worker.worker.core.entity.CatRegimen.CatRegimen;
+import com.seph_worker.worker.core.entity.CatSexo.CatSexo;
+import com.seph_worker.worker.core.entity.CatTipoContratacion.CatTipoContratacion;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,7 +77,7 @@ public class TabEmpleado {
     @Column(name = "cat_tipo_contratacion_id")
     private Integer tipoContratacionId;
 
-    @Column(name = "cat_nivel_academico_id")
+    @Column(name = "nivel_academico_id")
     private Integer nivelAcademicoId;
     //----------------------------------------->
 
@@ -98,5 +105,30 @@ public class TabEmpleado {
     @Column(name = "deleted")
     private Boolean deleted;
 
+    // ------
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_sexo_id",  referencedColumnName = "id", insertable = false, updatable = false)
+    private CatSexo catSexo;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_estado_civil_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CatEstadoCivil catEstadoCivil;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_regimen_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CatRegimen catRegimen;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_tipo_contratacion_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CatTipoContratacion catTipoContratacion;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nivel_academico_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CatNivelAcademico catNivelAcademico;
 
 }
