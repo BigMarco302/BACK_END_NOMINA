@@ -1,0 +1,85 @@
+package com.seph_worker.worker.service;
+
+
+import com.seph_worker.worker.core.dto.WebServiceResponse;
+import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.exception.ResourceNotFoundException;
+import com.seph_worker.worker.model.Empleado.EmployeeDTO;
+import com.seph_worker.worker.repository.Cat.*;
+import com.seph_worker.worker.repository.EmpleadoRepository.TabEmpleadoRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class EmpleadoService {
+
+    private TabEmpleadoRepository tabEmpleadoRepository;
+    private CatEstadoCivilRepository catEstadoCivilRepository;
+    private CatNivelAcademicoRepository catNivelAcademicoRepository;
+    private CatRegimenRepository catRegimenRepository;
+    private CatSexoRepository catSexoRepository;
+    private CatTipoContratacionRepository catTipoContratacionRepository;
+
+    public List<TabEmpleado>getAllEmployees(Integer tipoeContratacionId){
+        return tabEmpleadoRepository.findByTipoContratacionId(tipoeContratacionId);
+    }
+
+    private void validateIdsByEmployee(Integer catSexoId,Integer catEstadoCivilId, Integer catRegimenId , Integer catTipoContratacionId , Integer nivelAcademicoId){
+        catEstadoCivilRepository.findById(catEstadoCivilId)
+                .orElseThrow(() -> new ResourceNotFoundException("Estado Civil not found"));
+
+        catNivelAcademicoRepository.findById(nivelAcademicoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Nivel Academico not found"));
+
+        catRegimenRepository.findById(catRegimenId)
+                .orElseThrow(() -> new ResourceNotFoundException("Regimen not found"));
+
+        catSexoRepository.findById(catSexoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Sexo not found"));
+
+        catTipoContratacionRepository.findById(catTipoContratacionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo contratacion not found"));
+    }
+    @Transactional
+    public WebServiceResponse createEmployee(EmployeeDTO dto, CoreUser user){
+
+        validateIdsByEmployee(dto.getCatSexoId(),dto.getCatEstadoCivilId(),dto.getCatRegimenId(),dto.getCatTipoContratacionId(),dto.getNivelAcademicoId());
+
+        try {
+            TabEmpleado em = new TabEmpleado();
+            em.setId(null);
+            em.setRfc(dto.getRfc());
+            em.setCurp(dto.getCurp());
+            em.setPrimerApellido(dto.getPrimerApellido());
+            em.setSegundoApellido(dto.getSegundoApellido());
+            em.setNombre(dto.getNombre());
+            em.setQnaini(dto.getQnaini());
+            em.setQnagob(dto.getQnagob());
+            em.setQnasep(dto.getQnasep());
+            em.setPerfil(dto.getPerfil());
+            em.setNss(dto.getNss());
+
+            em.setNivel(dto.getNivel());
+            em.setSexoId(dto.getCatSexoId());
+            em.setEstadoCivilId(dto.getCatEstadoCivilId());
+            em.setRegimenId(dto.getCatRegimenId());
+            em.setTipoContratacionId(dto.getCatTipoContratacionId());
+            em.setNivelAcademicoId(dto.getNivelAcademicoId());
+
+            em.setActivo(dto.getActivo());
+            em.setUsCreated(user.getId());
+            em.setTsCreated(new Timestamp(System.currentTimeMillis()));
+            em.setDeleted(Boolean.FALSE);
+            tabEmpleadoRepository.save(em);
+            return new WebServiceResponse(true,"Se creo correctamente el empleado: "+em.getNombre()+" "+em.getSegundoApellido());
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al crear al empleado: "+e);
+        }
+    }
+}
