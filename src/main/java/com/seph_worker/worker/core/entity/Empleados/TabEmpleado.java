@@ -9,9 +9,11 @@ import com.seph_worker.worker.core.entity.Cat.CatRegimen;
 import com.seph_worker.worker.core.entity.Cat.CatSexo;
 import com.seph_worker.worker.core.entity.Cat.CatTipoContratacion;
 
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import java.sql.Timestamp;
@@ -20,14 +22,14 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name="tab_empleado")
+@Table(name="tab_empleados")
 @Where(clause = "deleted = false")
 public class TabEmpleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleado_seq")
+    @SequenceGenerator(name = "empleado_seq", sequenceName = "cat_empleados_id_empleado_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "rfc", length = 13)
     private String rfc;
@@ -59,9 +61,8 @@ public class TabEmpleado {
     @Column(name = "nss")
     private String nss;
 
-    @Basic
-    @Column(name = "nivel", columnDefinition = "json")
-    @Convert(converter = ListToJsonConverter.class)
+    @Type(JsonType.class)
+    @Column(name = "nivel", columnDefinition = "jsonb")
     private List<Integer> nivel;
 
     //----------------------------------------->
