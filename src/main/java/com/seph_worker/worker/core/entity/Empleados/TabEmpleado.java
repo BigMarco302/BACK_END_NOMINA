@@ -133,7 +133,10 @@ public class TabEmpleado {
     private CatNivelAcademico catNivelAcademico;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tabEmpleado", orphanRemoval = true)
+    @OneToMany(mappedBy = "tabEmpleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TabDocumentosEmpleado> documentosEmpleados;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "tabEmpleado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TabDomicilios> tabDomicilios;
 }
