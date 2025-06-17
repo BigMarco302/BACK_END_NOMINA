@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.CatEstadoCivil;
+package com.seph_worker.worker.core.entity.Cat;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.CatTipoContratacion;
+package com.seph_worker.worker.core.entity.Cat;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,14 +7,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "cat_tipo_contratacion")
-public class CatTipoContratacion {
+@Table(name = "cat_regimen")
+public class CatRegimen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Basic
-    @Column(name = "tipo_contratacion", nullable = false)
-    private String tipoContratacion;
+    @Column(name = "regimen", nullable = false)
+    private String regimen;
+
 }

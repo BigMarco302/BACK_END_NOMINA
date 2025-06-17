@@ -3,11 +3,11 @@ package com.seph_worker.worker.core.entity.Empleados;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seph_worker.worker.core.dto.ListToJsonConverter;
-import com.seph_worker.worker.core.entity.CatEstadoCivil.CatEstadoCivil;
-import com.seph_worker.worker.core.entity.CatNivelAcademico.CatNivelAcademico;
-import com.seph_worker.worker.core.entity.CatRegimen.CatRegimen;
-import com.seph_worker.worker.core.entity.CatSexo.CatSexo;
-import com.seph_worker.worker.core.entity.CatTipoContratacion.CatTipoContratacion;
+import com.seph_worker.worker.core.entity.Cat.CatEstadoCivil;
+import com.seph_worker.worker.core.entity.Cat.CatNivelAcademico;
+import com.seph_worker.worker.core.entity.Cat.CatRegimen;
+import com.seph_worker.worker.core.entity.Cat.CatSexo;
+import com.seph_worker.worker.core.entity.Cat.CatTipoContratacion;
 
 import jakarta.persistence.*;
 import lombok.Getter;
