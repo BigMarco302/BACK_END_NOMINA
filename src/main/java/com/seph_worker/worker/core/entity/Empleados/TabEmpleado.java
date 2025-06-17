@@ -131,4 +131,8 @@ public class TabEmpleado {
     @JoinColumn(name = "nivel_academico_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CatNivelAcademico catNivelAcademico;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "tabEmpleado", orphanRemoval = true)
+    private List<TabDocumentosEmpleado> documentosEmpleados;
+
 }
