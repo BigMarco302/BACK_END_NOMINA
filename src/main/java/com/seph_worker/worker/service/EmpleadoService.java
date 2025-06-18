@@ -9,8 +9,13 @@ import com.seph_worker.worker.model.Empleado.EmployeeDTO;
 import com.seph_worker.worker.repository.Cat.*;
 import com.seph_worker.worker.repository.EmpleadoRepository.TabEmpleadoRepository;
 import lombok.AllArgsConstructor;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.print.attribute.standard.PageRanges;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -26,8 +31,13 @@ public class EmpleadoService {
     private CatSexoRepository catSexoRepository;
     private CatTipoContratacionRepository catTipoContratacionRepository;
 
-    public List<TabEmpleado>getAllEmployees(Integer tipoeContratacionId){
-        return tabEmpleadoRepository.findByTipoContratacionId(tipoeContratacionId);
+    public List<TabEmpleado>getAllEmployees(Boolean base, int page,int size){
+        Pageable pages = PageRequest.of(page,size);
+        if(base){
+            return tabEmpleadoRepository.findEmpleaadosBase(pages);
+        }else{
+            return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
+        }
     }
 
     private void validateIdsByEmployee(Integer catSexoId,Integer catEstadoCivilId, Integer catRegimenId , Integer catTipoContratacionId , Integer nivelAcademicoId){
