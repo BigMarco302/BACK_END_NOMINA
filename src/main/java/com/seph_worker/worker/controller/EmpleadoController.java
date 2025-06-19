@@ -28,6 +28,18 @@ public class EmpleadoController {
         return empleadoService.createEmployee(employeeDTO,sessionUser.getUser());
     }
 
+    @PatchMapping("")
+    @Operation(summary = "update a employee in RH")
+    public WebServiceResponse updateEmployee(@RequestBody EmployeeDTO employeeDTO, @RequestHeader Integer employeeId) {
+        return empleadoService.updateEmployee(employeeDTO,employeeId,sessionUser.getUser());
+    }
+
+    @PatchMapping("/softdelete")
+    @Operation(summary = "softdelete a employee in RH")
+    public WebServiceResponse softdeleteEmployee(@RequestHeader Integer employeeId) {
+        return empleadoService.softdeleteEmployee(employeeId,sessionUser.getUser());
+    }
+
     @GetMapping("")
     @Operation(summary = "Get alls employees by tipo contratacion")
     public WebServiceResponse getAllEmployees(@RequestHeader Boolean base,

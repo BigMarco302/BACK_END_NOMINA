@@ -67,16 +67,16 @@ public class TabEmpleado {
 
     //----------------------------------------->
     @Column(name = "cat_sexo_id")
-    private Integer sexoId;
+    private Integer catSexoId;
 
     @Column(name = "cat_estado_civil_id")
-    private Integer estadoCivilId;
+    private Integer catEstadoCivilId;
 
     @Column(name = "cat_regimen_id")
-    private Integer regimenId;
+    private Integer catRegimenId;
 
     @Column(name = "cat_tipo_contratacion_id")
-    private Integer tipoContratacionId;
+    private Integer catTipoContratacionId;
 
     @Column(name = "nivel_academico_id")
     private Integer nivelAcademicoId;

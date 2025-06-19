@@ -36,6 +36,7 @@ WHERE r.deleted = false
 
  @Query(value = """
 SELECT
+        m.path AS config,
     m.description AS description,
     m.id AS moduleId,
     m.name AS moduleName,
@@ -62,6 +63,7 @@ AND ur.deleted = false
 
  @Query(value = """
 SELECT
+        m.path AS config,
     m.description AS description,
     m.id AS moduleId,
     m.name AS moduleName,

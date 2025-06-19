@@ -1,6 +1,7 @@
 package com.seph_worker.worker.service;
 
 
+import com.seph_worker.worker.core.dto.PatchUtils;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
 import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
@@ -37,6 +38,37 @@ public class EmpleadoService {
             return tabEmpleadoRepository.findEmpleaadosBase(pages);
         }else{
             return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
+        }
+    }
+    @Transactional
+    public WebServiceResponse updateEmployee(EmployeeDTO dto,Integer employeeId, CoreUser user){
+        TabEmpleado employee = tabEmpleadoRepository.findById(employeeId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+        validateIdsByEmployee(dto.getCatSexoId(),dto.getCatEstadoCivilId(),dto.getCatRegimenId(),dto.getCatTipoContratacionId(),dto.getNivelAcademicoId());
+
+        try {
+            PatchUtils.copyNonNullProperties(dto, employee);
+            employee.setTsModified(new Timestamp(System.currentTimeMillis()));
+            employee.setUsModified(user.getId());
+            tabEmpleadoRepository.save(employee);
+            return new WebServiceResponse(true, "Se actualizo correctamente el empleado: "+employee.getNombre()+" "+employee.getSegundoApellido());
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al actualizar el empleado: "+e);
+        }
+    }
+    @Transactional
+    public WebServiceResponse softdeleteEmployee(Integer employeeId, CoreUser user){
+        TabEmpleado employee = tabEmpleadoRepository.findById(employeeId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+
+        try {
+            employee.setDeleted(Boolean.TRUE);
+            employee.setUsDeleted(user.getId());
+            employee.setTsDeleted(new Timestamp(System.currentTimeMillis()));
+            tabEmpleadoRepository.save(employee);
+            return new WebServiceResponse(true,"Se elimino correctamente el empleado: "+employee.getNombre()+" "+employee.getSegundoApellido());
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al eliminar al empleado: +"+e);
         }
     }
 
@@ -76,10 +108,10 @@ public class EmpleadoService {
             em.setNss(dto.getNss());
 
             em.setNivel(dto.getNivel());
-            em.setSexoId(dto.getCatSexoId());
-            em.setEstadoCivilId(dto.getCatEstadoCivilId());
-            em.setRegimenId(dto.getCatRegimenId());
-            em.setTipoContratacionId(dto.getCatTipoContratacionId());
+            em.setCatSexoId(dto.getCatSexoId());
+            em.setCatEstadoCivilId(dto.getCatEstadoCivilId());
+            em.setCatRegimenId(dto.getCatRegimenId());
+            em.setCatTipoContratacionId(dto.getCatTipoContratacionId());
             em.setNivelAcademicoId(dto.getNivelAcademicoId());
 
             em.setActivo(dto.getActivo());

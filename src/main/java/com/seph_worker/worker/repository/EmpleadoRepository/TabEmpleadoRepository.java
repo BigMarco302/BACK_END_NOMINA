@@ -11,7 +11,6 @@ import java.util.Map;
 
 @Repository
 public interface TabEmpleadoRepository extends JpaRepository<TabEmpleado, Integer> {
-    List<TabEmpleado> findByTipoContratacionId(Integer tipoeContratacionId);
 
     @Query(value = """
     SELECT
