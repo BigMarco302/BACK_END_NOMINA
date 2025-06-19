@@ -48,11 +48,10 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro al usuario"));
     }
 
-    public List<Map<String, Object>> getCredentialsByUser(Integer userId) {
+    public List<Map<String, Object>> getCredentialsByUser(CoreUser user) {
         List<Map<String, Object>> modules = new ArrayList<>();
-        CoreUser user = userRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("No se encontro al usuario"));
        List<Integer> extras = (List<Integer>) user.getConfig().get("extras");
-       List<Integer> rolIds = userRepository.getRolesIdByUser(userId);
+       List<Integer> rolIds = userRepository.getRolesIdByUser(user.getId());
         if (extras == null) {
             extras = new ArrayList<>();
         }

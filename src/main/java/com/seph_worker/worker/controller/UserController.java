@@ -68,9 +68,8 @@ public class UserController {
 
     @GetMapping("/moduleByUser")
     @Operation(summary = "Obtiene los modulos del usuario")
-    public WebServiceResponse getCredentialsByUser(
-            @RequestHeader Integer userId){
-        return new WebServiceResponse(userService.getCredentialsByUser(userId));
+    public WebServiceResponse getCredentialsByUser(){
+        return new WebServiceResponse(userService.getCredentialsByUser(sessionUser.getUser()));
     }
 
     @PostMapping("/validateToken")
