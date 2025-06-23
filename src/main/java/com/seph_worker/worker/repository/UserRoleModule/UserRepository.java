@@ -34,9 +34,9 @@ WHERE r.deleted = false
     List<Map<String,String>> getEmailsSystem();
 
 
- @Query(value = """
+   @Query(value = """
 SELECT
-        m.path AS config,
+    m.path AS config,
     m.description AS description,
     m.id AS moduleId,
     m.name AS moduleName,
@@ -47,10 +47,10 @@ SELECT
 FROM core_roles_modules rm
     LEFT JOIN core_modules m ON rm.module_id = m.id
     LEFT JOIN core_modules m1 ON m.parent_id = m1.id
-    LEFT JOIN core_icons i ON m1.icon_id = i.id 
+    LEFT JOIN core_icons i ON m.icon_id = i.id 
 WHERE rm.role_id IN(:roleId)
 """, nativeQuery = true)
- List<Map<String,Object>> getCredentialsByUser(List<Integer> roleId);
+   List<Map<String,Object>> getCredentialsByUser(List<Integer> roleId);
 
     @Query(value = """
 SELECT
@@ -61,11 +61,11 @@ AND ur.deleted = false
 """, nativeQuery = true)
     List<Integer> getRolesIdByUser(Integer userId);
 
- @Query(value = """
+   @Query(value = """
 SELECT
-        m.path AS config,
     m.description AS description,
     m.id AS moduleId,
+    m.path AS config,
     m.name AS moduleName,
     m.parent_id AS parentId,
     m1.name AS parentName,
@@ -73,10 +73,10 @@ SELECT
     m.visible AS vista
 FROM core_modules m 
     LEFT JOIN core_modules m1 ON m.parent_id = m1.id
-    LEFT JOIN core_icons i ON m1.icon_id = i.id 
+    LEFT JOIN core_icons i ON m.icon_id = i.id 
 WHERE m.id IN (:moduleId)
 """, nativeQuery = true)
- List<Map<String,Object>> getCredentialsByModule(List<Integer> moduleId);
+   List<Map<String,Object>> getCredentialsByModule(List<Integer> moduleId);
 
 
 }

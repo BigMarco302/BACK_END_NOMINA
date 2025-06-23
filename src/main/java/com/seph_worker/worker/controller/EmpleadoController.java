@@ -42,10 +42,9 @@ public class EmpleadoController {
 
     @GetMapping("")
     @Operation(summary = "Get alls employees by tipo contratacion")
-    public WebServiceResponse getAllEmployees(@RequestHeader Boolean base,
-                                              @RequestHeader int page,
+    public WebServiceResponse getAllEmployees(@RequestHeader int page,
                                               @RequestHeader int size) {
-        return new WebServiceResponse(empleadoService.getAllEmployees(base, page, size));
+        return new WebServiceResponse(empleadoService.getAllEmployees(page, size));
     }
 
 }

@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.print.attribute.standard.PageRanges;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -32,13 +34,13 @@ public class EmpleadoService {
     private CatSexoRepository catSexoRepository;
     private CatTipoContratacionRepository catTipoContratacionRepository;
 
-    public List<TabEmpleado>getAllEmployees(Boolean base, int page,int size){
+    public Map<String,Object> getAllEmployees(int page,int size){
         Pageable pages = PageRequest.of(page,size);
-        if(base){
-            return tabEmpleadoRepository.findEmpleaadosBase(pages);
-        }else{
-            return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
-        }
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("base",tabEmpleadoRepository.findEmpleaadosBase(pages));
+        map.put("otros",tabEmpleadoRepository.findEmpleaadosNotBase(pages));
+        return map;
     }
     @Transactional
     public WebServiceResponse updateEmployee(EmployeeDTO dto,Integer employeeId, CoreUser user){
