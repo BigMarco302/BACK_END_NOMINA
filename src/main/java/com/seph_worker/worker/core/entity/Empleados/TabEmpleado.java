@@ -2,6 +2,8 @@ package com.seph_worker.worker.core.entity.Empleados;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seph_worker.worker.core.dto.AuditEntityN1;
 import com.seph_worker.worker.core.dto.ListToJsonConverter;
 import com.seph_worker.worker.core.entity.Cat.CatEstadoCivil;
 import com.seph_worker.worker.core.entity.Cat.CatNivelAcademico;
@@ -18,13 +20,13 @@ import org.hibernate.annotations.Where;
 
 import java.sql.Timestamp;
 import java.util.List;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Setter
 @Getter
 @Entity
 @Table(name="tab_empleados")
 @Where(clause = "deleted = false")
-public class TabEmpleado {
+public class TabEmpleado extends AuditEntityN1 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleado_seq")
@@ -61,11 +63,14 @@ public class TabEmpleado {
     @Column(name = "nss")
     private String nss;
 
+    @Column(name = "activo")
+    private Boolean activo;
+
     @Type(JsonType.class)
     @Column(name = "nivel", columnDefinition = "jsonb")
     private List<Integer> nivel;
 
-    //----------------------------------------->
+
     @Column(name = "cat_sexo_id")
     private Integer catSexoId;
 
@@ -80,34 +85,8 @@ public class TabEmpleado {
 
     @Column(name = "nivel_academico_id")
     private Integer nivelAcademicoId;
-    //----------------------------------------->
 
-    @Column(name = "activo")
-    private Boolean activo;
 
-    @Column(name = "us_created")
-    private Integer usCreated;
-
-    @Column(name = "ts_created")
-    private Timestamp tsCreated;
-
-    @Column(name = "us_modified")
-    private Integer usModified;
-
-    @Column(name = "ts_modified")
-    private Timestamp tsModified;
-
-    @Column(name = "us_deleted")
-    private Integer usDeleted;
-
-    @Column(name = "ts_deleted")
-    private Timestamp tsDeleted;
-
-    @Column(name = "deleted")
-    private Boolean deleted;
-
-    // ------
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cat_sexo_id",  referencedColumnName = "id", insertable = false, updatable = false)
     private CatSexo catSexo;

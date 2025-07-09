@@ -22,7 +22,7 @@ SELECT
     n.fecha,
     ic.icon,
     tn.name
-FROM core_user_notification un
+FROM core_user_notifications un
 INNER JOIN core_notifications n ON un.notification_id = n.id
 INNER JOIN core_icon_notification ic ON n.icon_id = ic.id
 INNER JOIN core_type_notification tn ON n.type_notification_id = tn.id
