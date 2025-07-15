@@ -2,8 +2,8 @@ package com.seph_worker.worker.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
-import com.seph_worker.worker.core.entity.CoreTokensVerify;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.CoreTokensVerify;
 import com.seph_worker.worker.repository.Core.TokensVerifyRepository;
 import com.seph_worker.worker.service.Core.EmailSystemService;
 import jakarta.mail.MessagingException;

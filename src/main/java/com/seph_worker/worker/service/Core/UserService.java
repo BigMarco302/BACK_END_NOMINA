@@ -2,9 +2,9 @@ package com.seph_worker.worker.service.Core;
 
 import com.seph_worker.worker.core.dto.EncryptionUtils;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreModules;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUserRole;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreModules;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUserRole;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.CoreSystem.UserDTO;
 import com.seph_worker.worker.repository.Core.TokensVerifyRepository;

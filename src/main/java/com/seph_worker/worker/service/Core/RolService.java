@@ -2,9 +2,9 @@ package com.seph_worker.worker.service.Core;
 
 
 import com.seph_worker.worker.core.dto.WebServiceResponse;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreRole;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUserRole;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreRoleModule;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreRole;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUserRole;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreRoleModule;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.CoreSystem.RoleDTO;
 import com.seph_worker.worker.repository.Core.UserRoleModule.*;

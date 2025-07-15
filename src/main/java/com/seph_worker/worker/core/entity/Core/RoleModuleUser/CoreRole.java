@@ -1,18 +1,18 @@
-package com.seph_worker.worker.core.entity.RoleModuleUser;
-
+package com.seph_worker.worker.core.entity.Core.RoleModuleUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seph_worker.worker.core.dto.MapToJsonConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Setter
 @Getter
 @Entity
-@Table(name="core_modules")
-public class CoreModules {
-
+@Table(name="core_roles")
+public class CoreRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,27 +24,23 @@ public class CoreModules {
     private String name;
 
     @Basic
-    @Column(name = "path", nullable = false)
-    private String path;
-
-    @Basic
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Basic
-    @Column(name = "visible", nullable = false)
-    private Boolean visible;
+    @Column(name = "config")
+    @Convert(converter = MapToJsonConverter.class)
+    private Map<String, Object> config;
 
     @Basic
     @Column(name = "deleted", nullable = false)
     private Boolean deleted;
 
     @Basic
-    @Column(name = "parent_id", nullable = false)
+    @Column(name = "parent_id")
     private Integer parentId;
 
     @Basic
-    @Column(name = "icon_id", nullable = false)
-    private Integer iconId;
+    @Column(name = "permission_id")
+    private Integer permissionoId;
 
 }

@@ -1,7 +1,7 @@
 package com.seph_worker.worker.service.Core;
 
 
-import com.seph_worker.worker.core.entity.Emails.CoreEmailHtml;
+import com.seph_worker.worker.core.entity.Core.Emails.CoreEmailHtml;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.repository.Core.EmailsRepository.EmailHtmlRepository;
 import com.seph_worker.worker.repository.Core.EmailsRepository.EmailSystemRepository;

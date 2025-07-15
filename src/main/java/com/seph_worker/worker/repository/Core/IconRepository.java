@@ -1,7 +1,7 @@
 package com.seph_worker.worker.repository.Core;
 
 
-import com.seph_worker.worker.core.entity.Notifications.CoreIcon;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreIcon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package com.seph_worker.worker.repository.Core.UserRoleModule;
 
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreModules;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreModules;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

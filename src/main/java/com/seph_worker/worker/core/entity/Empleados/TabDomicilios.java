@@ -3,8 +3,8 @@ package com.seph_worker.worker.core.entity.Empleados;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
-import com.seph_worker.worker.core.entity.Cat.*;
 
+import com.seph_worker.worker.core.entity.Catalogos.Direcciones.CatTipoDomicilio;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +30,6 @@ public class TabDomicilios extends AuditEntityN1 {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tab_empleado_id", referencedColumnName = "id", insertable = false, updatable = false)
     private TabEmpleado tabEmpleado;
-
 
     @Column(name = "calle")
     private String calle;
@@ -63,6 +62,4 @@ public class TabDomicilios extends AuditEntityN1 {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cat_tipo_domicilio_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CatTipoDomicilio catTipoDomicilio;
-
-
 }

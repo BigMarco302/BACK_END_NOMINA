@@ -1,6 +1,5 @@
 package com.seph_worker.worker.security;
 
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;

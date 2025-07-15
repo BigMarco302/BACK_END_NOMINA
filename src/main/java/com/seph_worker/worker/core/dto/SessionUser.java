@@ -1,6 +1,6 @@
 package com.seph_worker.worker.core.dto;
 
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.repository.Core.UserRoleModule.UserRepository;
 import lombok.AllArgsConstructor;

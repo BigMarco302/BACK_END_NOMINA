@@ -2,10 +2,10 @@ package com.seph_worker.worker.service.Core;
 
 
 import com.seph_worker.worker.core.dto.WebServiceResponse;
-import com.seph_worker.worker.core.entity.Notifications.CoreIcon;
-import com.seph_worker.worker.core.entity.Notifications.CoreMessage;
-import com.seph_worker.worker.core.entity.Notifications.CoreSubscriptionNotificationUser;
-import com.seph_worker.worker.core.entity.Notifications.CoreUserNotification;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreIcon;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreMessage;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreSubscriptionNotificationUser;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreUserNotification;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.CoreSystem.IconDTO;
 import com.seph_worker.worker.repository.Core.Notifications.*;

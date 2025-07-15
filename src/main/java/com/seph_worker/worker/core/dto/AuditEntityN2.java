@@ -1,7 +1,7 @@
 package com.seph_worker.worker.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

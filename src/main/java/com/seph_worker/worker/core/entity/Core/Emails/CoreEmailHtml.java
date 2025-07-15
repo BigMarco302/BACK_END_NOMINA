@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Emails;
+package com.seph_worker.worker.core.entity.Core.Emails;
 
 
 import jakarta.persistence.*;

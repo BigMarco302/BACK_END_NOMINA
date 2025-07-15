@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Notifications;
+package com.seph_worker.worker.core.entity.Core.Notifications;
 
 
 import jakarta.persistence.*;

@@ -1,17 +1,17 @@
-package com.seph_worker.worker.core.entity.RoleModuleUser;
+package com.seph_worker.worker.core.entity.Core;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @Entity
-@Table(name="core_users_roles")
-public class CoreUserRole {
+@Table(name="core_tokens_verify")
+public class CoreTokensVerify {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +19,22 @@ public class CoreUserRole {
     private Integer id;
 
     @Basic
+    @Column(name = "token", nullable = false)
+    private String token;
+
+    @Basic
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
+
     @Basic
-    @Column(name = "role_id", nullable = false)
-    private Integer roleId;
+    @Column(name = "ts_created", nullable = false)
+    private Timestamp ts_created;
+
 
     @Basic
     @Column(name = "deleted", nullable = false)
     private Boolean deleted;
+
+
 }

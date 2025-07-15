@@ -1,5 +1,4 @@
-package com.seph_worker.worker.core.entity.Cat;
-
+package com.seph_worker.worker.core.entity.Catalogos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN2;
@@ -9,21 +8,22 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "cat_clabes")
+@Table(name="cat_documentos")
 @Where(clause = "deleted = false")
-public class CatClabe extends AuditEntityN2 {
-
+public class CatDocumento extends AuditEntityN2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false)
-    private Integer nombre;
+    @Basic
+    @Column(name = "categoria", nullable = false)
+    private String categoria;
 
-    @Column(name = "descripcion")
-    private Integer descripcion;
+    @Basic
+    @Column(name = "documento", nullable = false)
+    private String documento;
 }

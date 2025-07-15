@@ -1,7 +1,7 @@
 package com.seph_worker.worker.repository.Core.Notifications;
 
 
-import com.seph_worker.worker.core.entity.Notifications.CoreSubscriptionNotificationUser;
+import com.seph_worker.worker.core.entity.Core.Notifications.CoreSubscriptionNotificationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

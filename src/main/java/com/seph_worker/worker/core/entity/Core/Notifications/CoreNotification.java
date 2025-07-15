@@ -1,14 +1,16 @@
-package com.seph_worker.worker.core.entity.Emails;
+package com.seph_worker.worker.core.entity.Core.Notifications;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Setter
 @Getter
 @Entity
-@Table(name="core_emails_system")
-public class CoreEmailSystem {
+@Table(name="core_notifications")
+public class CoreNotification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +20,6 @@ public class CoreEmailSystem {
     @Basic
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Basic
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @Basic
     @Column(name = "description", nullable = false)

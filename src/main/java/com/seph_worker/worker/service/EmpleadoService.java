@@ -4,7 +4,7 @@ package com.seph_worker.worker.service;
 import com.seph_worker.worker.core.dto.PatchUtils;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.Empleado.EmployeeDTO;
 import com.seph_worker.worker.repository.Catalogos.*;

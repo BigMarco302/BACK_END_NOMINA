@@ -1,6 +1,6 @@
 package com.seph_worker.worker.security;
 
-import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
+import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.repository.Core.UserRoleModule.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

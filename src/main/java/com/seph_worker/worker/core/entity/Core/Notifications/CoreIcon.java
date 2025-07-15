@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Notifications;
+package com.seph_worker.worker.core.entity.Core.Notifications;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,13 +9,17 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name="core_notifications")
-public class CoreNotification {
+@Table(name= "core_icons")
+public class CoreIcon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Basic
+    @Column(name = "icon", nullable = false)
+    private String icon;
 
     @Basic
     @Column(name = "name", nullable = false)
@@ -24,9 +28,5 @@ public class CoreNotification {
     @Basic
     @Column(name = "description", nullable = false)
     private String description;
-
-    @Basic
-    @Column(name = "deleted", nullable = false)
-    private Boolean deleted;
 
 }

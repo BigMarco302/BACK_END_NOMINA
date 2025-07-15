@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Cat;
+package com.seph_worker.worker.core.entity.Catalogos.Direcciones;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

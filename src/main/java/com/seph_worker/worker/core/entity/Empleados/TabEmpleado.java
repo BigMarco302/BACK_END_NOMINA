@@ -4,12 +4,11 @@ package com.seph_worker.worker.core.entity.Empleados;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
-import com.seph_worker.worker.core.dto.ListToJsonConverter;
-import com.seph_worker.worker.core.entity.Cat.CatEstadoCivil;
-import com.seph_worker.worker.core.entity.Cat.CatNivelAcademico;
-import com.seph_worker.worker.core.entity.Cat.CatRegimen;
-import com.seph_worker.worker.core.entity.Cat.CatSexo;
-import com.seph_worker.worker.core.entity.Cat.CatTipoContratacion;
+import com.seph_worker.worker.core.entity.Catalogos.CatEstadoCivil;
+import com.seph_worker.worker.core.entity.Catalogos.CatNivelAcademico;
+import com.seph_worker.worker.core.entity.Catalogos.CatRegimen;
+import com.seph_worker.worker.core.entity.Catalogos.CatSexo;
+import com.seph_worker.worker.core.entity.Catalogos.CatTipoContratacion;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
@@ -18,7 +17,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
-import java.sql.Timestamp;
 import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Setter
