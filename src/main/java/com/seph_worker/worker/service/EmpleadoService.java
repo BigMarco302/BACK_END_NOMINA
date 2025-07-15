@@ -7,7 +7,7 @@ import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
 import com.seph_worker.worker.core.entity.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.Empleado.EmployeeDTO;
-import com.seph_worker.worker.repository.Cat.*;
+import com.seph_worker.worker.repository.Catalogos.*;
 import com.seph_worker.worker.repository.EmpleadoRepository.TabEmpleadoRepository;
 import lombok.AllArgsConstructor;
 
@@ -16,11 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.print.attribute.standard.PageRanges;
-
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -109,7 +106,7 @@ public class EmpleadoService {
             em.setPerfil(dto.getPerfil());
             em.setNss(dto.getNss());
 
-            em.setNivel(dto.getNivel());
+            //em.setNivel(dto.getNivel());
             em.setCatSexoId(dto.getCatSexoId());
             em.setCatEstadoCivilId(dto.getCatEstadoCivilId());
             em.setCatRegimenId(dto.getCatRegimenId());

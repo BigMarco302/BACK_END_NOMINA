@@ -70,7 +70,6 @@ public class TabEmpleado extends AuditEntityN1 {
     @Column(name = "nivel", columnDefinition = "jsonb")
     private List<Integer> nivel;
 
-
     @Column(name = "cat_sexo_id")
     private Integer catSexoId;
 

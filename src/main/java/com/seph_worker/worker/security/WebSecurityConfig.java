@@ -1,13 +1,12 @@
 package com.seph_worker.worker.security;
 
-import com.seph_worker.worker.repository.TokensVerifyRepository;
-import com.seph_worker.worker.service.EmailSystemService;
+import com.seph_worker.worker.repository.Core.TokensVerifyRepository;
+import com.seph_worker.worker.service.Core.EmailSystemService;
 import jakarta.servlet.Filter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.util.Map;
 
 @Configuration
 @AllArgsConstructor
@@ -49,12 +46,11 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/users/changePasswordRecovery").permitAll() // Permitir acceso a /login
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permitir OPTIONS para CORS
                 .requestMatchers(
-                        "/swagger-ui/**", "/swagger-ui.html",  "/v3/api-docs/**","/swagger/**" // si quieres asegurar también este path
+                        "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger/**" // si quieres asegurar también este path
                 ).permitAll()
                 .requestMatchers("/*.*").permitAll() // Permitir el acceso a archivos estáticos
                 .anyRequest().authenticated() // Proteger cualquier otra solicitud
-                .and()
-                .sessionManagement()
+                .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Sin estado
                 .and()
                 .addFilter(jwtAuthenticationFilter) // Añadir filtro de autenticación

@@ -1,6 +1,7 @@
 package com.seph_worker.worker.core.dto;
 
-import com.seph_worker.worker.repository.UserRoleModule.UserRepository;
+
+import com.seph_worker.worker.repository.Core.UserRoleModule.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

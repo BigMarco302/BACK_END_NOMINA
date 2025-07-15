@@ -55,8 +55,9 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>6.4.3.Final</version> <!-- Asegúrate de usar una versión compatible -->
+			<version>6.2.7.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.swagger.core.v3</groupId>
 			<artifactId>swagger-annotations</artifactId>
