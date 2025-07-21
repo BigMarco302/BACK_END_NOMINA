@@ -16,4 +16,10 @@ public class CatEntidad{
     @Column(name = "cve_ent", length = 2)
     private String cveEnt;
 
+    @Column(name = "nom_ent")
+    private String nomEnt;
+
+    @Column(name = "nom_abr")
+    private String nomAbr;
+
 }

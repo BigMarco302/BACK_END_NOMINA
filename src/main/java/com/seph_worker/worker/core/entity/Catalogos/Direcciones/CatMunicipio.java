@@ -16,4 +16,13 @@ public class CatMunicipio {
     @Column(name = "cve_mun", length = 2)
     private String cveMun;
 
+    @Column(name = "cve_ent", length = 2)
+    private String cveEnt;
+
+    @Column(name = "nom_ent")
+    private String nomEnt;
+
+    @Column(name = "nom_mun" )
+    private String nomMun;
+
 }

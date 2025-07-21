@@ -27,8 +27,8 @@ public interface TabEmpleadoRepository extends JpaRepository<TabEmpleado, Intege
         te.*
     FROM tab_empleados te
     WHERE te.deleted = false
-    AND te.cat_tipo_contratacion_id = 10
+    AND te.cat_tipo_contratacion_id =:catTipoContratacionId
     ORDER BY te.id DESC
 """, nativeQuery = true)
-    List<TabEmpleado> findEmpleaadosBase(Pageable pageable);
+    List<TabEmpleado> findEmpleaados(Pageable pageable, Integer catTipoContratacionId);
 }

@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -31,14 +32,16 @@ public class EmpleadoService {
     private CatSexoRepository catSexoRepository;
     private CatTipoContratacionRepository catTipoContratacionRepository;
 
-    public Map<String,Object> getAllEmployees(int page,int size){
+    public  List<TabEmpleado> getAllEmployees(int page,int size, Integer catTipoContratacionId){
         Pageable pages = PageRequest.of(page,size);
-        Map<String,Object> map = new HashMap<>();
-
-        map.put("base",tabEmpleadoRepository.findEmpleaadosBase(pages));
-        map.put("otros",tabEmpleadoRepository.findEmpleaadosNotBase(pages));
-        return map;
+        return tabEmpleadoRepository.findEmpleaados(pages,catTipoContratacionId);
     }
+
+    public List<TabEmpleado> getAllEmployeesBase(int page,int size){
+        Pageable pages = PageRequest.of(page,size);
+        return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
+    }
+
     @Transactional
     public WebServiceResponse updateEmployee(EmployeeDTO dto,Integer employeeId, CoreUser user){
         TabEmpleado employee = tabEmpleadoRepository.findById(employeeId)

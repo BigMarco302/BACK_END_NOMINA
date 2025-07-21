@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,10 +19,22 @@ public class CatalogoDireccionesController {
 
     private final CatalogoDireccionesService catalogoDireccionesService;
 
-
     @GetMapping("/entidad")
     @Operation(summary = "get a dinamic catalog address")
     public WebServiceResponse getCatalogoEntidad() {
         return new WebServiceResponse(catalogoDireccionesService.getCatalogoEntidad());
+    }
+
+    @GetMapping("/municipio")
+    @Operation(summary = "get a dinamic catalog address")
+    public WebServiceResponse getCatalogoMunicipio(@RequestHeader String cveEnt) {
+        return new WebServiceResponse(catalogoDireccionesService.getCatalogoMunicipio(cveEnt));
+    }
+
+    @GetMapping("/localidad")
+    @Operation(summary = "get a dinamic catalog address")
+    public WebServiceResponse getLocalidadMunicipio(@RequestHeader String cveEnt,
+                                                    @RequestHeader String cveMun) {
+        return new WebServiceResponse(catalogoDireccionesService.getCatalogoLocalidad(cveEnt,cveMun));
     }
 }

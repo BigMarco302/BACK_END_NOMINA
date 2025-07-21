@@ -40,11 +40,19 @@ public class EmpleadoController {
         return empleadoService.softdeleteEmployee(employeeId,sessionUser.getUser());
     }
 
-    @GetMapping("")
+    @GetMapping("/contratacionId")
     @Operation(summary = "Get alls employees by tipo contratacion")
     public WebServiceResponse getAllEmployees(@RequestHeader int page,
+                                              @RequestHeader int size,
+                                              @RequestHeader Integer catTipoContratacionId) {
+        return new WebServiceResponse(empleadoService.getAllEmployees(page, size,catTipoContratacionId));
+    }
+
+    @GetMapping("/base")
+    @Operation(summary = "Get alls employees base")
+    public WebServiceResponse getAllEmployeesBase(@RequestHeader int page,
                                               @RequestHeader int size) {
-        return new WebServiceResponse(empleadoService.getAllEmployees(page, size));
+        return new WebServiceResponse(empleadoService.getAllEmployeesBase(page, size));
     }
 
 }
