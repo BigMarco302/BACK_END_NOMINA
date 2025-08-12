@@ -1,13 +1,12 @@
-package com.seph_worker.worker.repository.EmpleadoRepository;
+package com.seph_worker.worker.repository.Tab.EmpleadoRepository;
 
-import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface TabEmpleadoRepository extends JpaRepository<TabEmpleado, Integer> {

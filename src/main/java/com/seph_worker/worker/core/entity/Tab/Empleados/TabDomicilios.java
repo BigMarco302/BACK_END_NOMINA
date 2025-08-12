@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Empleados;
+package com.seph_worker.worker.core.entity.Tab.Empleados;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

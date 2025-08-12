@@ -3,12 +3,12 @@ package com.seph_worker.worker.service;
 
 import com.seph_worker.worker.core.dto.PatchUtils;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
-import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
 import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.Empleado.EmployeeDTO;
 import com.seph_worker.worker.repository.Catalogos.*;
-import com.seph_worker.worker.repository.EmpleadoRepository.TabEmpleadoRepository;
+import com.seph_worker.worker.repository.Tab.EmpleadoRepository.TabEmpleadoRepository;
 import lombok.AllArgsConstructor;
 
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @AllArgsConstructor

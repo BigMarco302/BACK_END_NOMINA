@@ -1,29 +1,25 @@
 package com.seph_worker.worker.core.entity.Catalogos;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.seph_worker.worker.core.dto.AuditEntityN2;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
+
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Getter
 @Setter
 @Entity
-@Table(name = "cat_clabes")
-@Where(clause = "deleted = false")
-public class CatClabe extends AuditEntityN2 {
+@Table(name = "cat_codigo_creacion")
+public class CatCodigoCreacion {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_codigo_creacion", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false)
-    private Integer nombre;
+    @Column(name = "codigo_creacion", nullable = false)
+    private String codigoCreacion;
 
-    @Column(name = "descripcion")
-    private Integer descripcion;
 }

@@ -4,7 +4,7 @@ package com.seph_worker.worker.core.entity.Fup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
-import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

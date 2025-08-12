@@ -1,14 +1,14 @@
-package com.seph_worker.worker.core.entity.Empleados;
+package com.seph_worker.worker.core.entity.Tab.Empleados;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
-import com.seph_worker.worker.core.entity.Catalogos.CatEstadoCivil;
-import com.seph_worker.worker.core.entity.Catalogos.CatNivelAcademico;
-import com.seph_worker.worker.core.entity.Catalogos.CatRegimen;
-import com.seph_worker.worker.core.entity.Catalogos.CatSexo;
-import com.seph_worker.worker.core.entity.Catalogos.CatTipoContratacion;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatEstadoCivil;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatNivelAcademico;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatRegimen;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatSexo;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatTipoContratacion;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;

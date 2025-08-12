@@ -1,9 +1,9 @@
-package com.seph_worker.worker.core.entity.Empleados;
+package com.seph_worker.worker.core.entity.Tab.Empleados;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
-import com.seph_worker.worker.core.entity.Catalogos.CatBanco;
-import com.seph_worker.worker.core.entity.Catalogos.CatClabe;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatBanco;
+import com.seph_worker.worker.core.entity.Catalogos.Empleado.CatClabe;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

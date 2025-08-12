@@ -2,7 +2,7 @@ package com.seph_worker.worker.core.entity.Core.RoleModuleUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seph_worker.worker.core.dto.MapToJsonConverter;
-import com.seph_worker.worker.core.entity.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

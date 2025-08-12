@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Catalogos;
+package com.seph_worker.worker.core.entity.Catalogos.Empleado;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN2;
@@ -11,19 +11,15 @@ import org.hibernate.annotations.Where;
 @Setter
 @Getter
 @Entity
-@Table(name = "cat_sexo")
+@Table(name = "cat_tipo_contratacion")
 @Where(clause = "deleted = false")
-public class CatSexo extends AuditEntityN2 {
+public class CatTipoContratacion extends AuditEntityN2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Basic
-    @Column(name = "cve_sexo", nullable = false)
-    private Character cveSexo;
-
-    @Basic
-    @Column(name = "sexo", nullable = false)
-    private String sexo;
+    @Column(name = "tipo_contratacion", nullable = false)
+    private String tipoContratacion;
 }

@@ -1,4 +1,4 @@
-package com.seph_worker.worker.core.entity.Catalogos;
+package com.seph_worker.worker.core.entity.Catalogos.Empleado;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN2;
@@ -8,21 +8,19 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "cat_banco")
+@Table(name = "cat_regimen")
 @Where(clause = "deleted = false")
-public class CatBanco extends AuditEntityN2 {
+public class CatRegimen extends AuditEntityN2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "cve_banco", nullable = false)
-    private Integer cveBanco;
-
-    @Column(name = "banco")
-    private String banco;
+    @Basic
+    @Column(name = "regimen", nullable = false)
+    private String regimen;
 
 }
