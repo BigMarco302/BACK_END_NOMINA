@@ -1,4 +1,4 @@
-package com.seph_worker.worker.service;
+package com.seph_worker.worker.service.Tab;
 
 
 import com.seph_worker.worker.core.dto.PatchUtils;
@@ -38,6 +38,10 @@ public class EmpleadoService {
     public List<TabEmpleado> getAllEmployeesBase(int page,int size){
         Pageable pages = PageRequest.of(page,size);
         return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
+    }
+
+    public List<TabEmpleado> getEmployeesByTarget(String target, String value){
+        return tabEmpleadoRepository.findEmployeesByTarget(target,("%" + value + "%"));
     }
 
     @Transactional

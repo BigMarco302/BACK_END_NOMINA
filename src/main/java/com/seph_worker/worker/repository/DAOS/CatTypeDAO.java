@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,26 +23,31 @@ public class CatTypeDAO {
         String sql = String.format("""
                     SELECT *
                     FROM %s l
-                    WHERE l.deleted = false
-                        %s
+                     %s
                 """, moduleName, whereCondition);
 
         return sql;
     }
-    public Object getCatType(CatTypesEnum catType, String whereCondition, String typeConditionString, Integer typeConditionInteger){
+    public Object getCatType(CatTypesEnum catType, String whereCondition, String typeCondition, Boolean isDeleted){
         try {
-            String whereConditionSql = "";
-            boolean hasCondition = whereCondition != null && (typeConditionString != null || typeConditionInteger != null);
+            boolean hasCondition = whereCondition != null && (typeCondition != null);
 
-            if(hasCondition)whereConditionSql = " AND l."+whereCondition+" = :entityType";
+            StringBuilder whereConditionSql = new StringBuilder();
+            List<String> clauses = new ArrayList<>();
 
-            Query query = entityManager.createNativeQuery(sqlLog(catType.getValue(),whereConditionSql));
+            if (hasCondition) clauses.add("CAST(l." + whereCondition + " AS TEXT) = :entityType");
+            if (isDeleted != null) clauses.add("l.deleted = " + isDeleted);
+
+            if (!clauses.isEmpty()) {
+                whereConditionSql.append(" WHERE ").append(String.join(" AND ", clauses));
+            }
+
+            Query query = entityManager.createNativeQuery(sqlLog(catType.getValue(),whereConditionSql.toString()));
 
             QueryUtils.setResultTransformerWithExcludeColumns(query, List.of("ts_deleted","us_deleted","deleted"));
 
             if (hasCondition) {
-                Object conditionValue = (typeConditionString != null) ? typeConditionString : typeConditionInteger;
-                query.setParameter("entityType", conditionValue);
+                query.setParameter("entityType", typeCondition);
             }
 
             List<?> resultList = query.getResultList();

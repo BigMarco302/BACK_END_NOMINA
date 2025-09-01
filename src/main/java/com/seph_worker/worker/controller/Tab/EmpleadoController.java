@@ -1,11 +1,12 @@
-package com.seph_worker.worker.controller;
+package com.seph_worker.worker.controller.Tab;
 
 
 import com.seph_worker.worker.core.dto.SessionUser;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 import com.seph_worker.worker.model.Empleado.EmployeeDTO;
-import com.seph_worker.worker.service.EmpleadoService;
+import com.seph_worker.worker.service.Tab.EmpleadoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +22,13 @@ public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
     private final SessionUser sessionUser;
+
+        @GetMapping("/By/{target}")
+    @Operation(summary = "Get alls employees base")
+    public WebServiceResponse getEmployeesByTarget(@PathVariable @Schema(allowableValues = {"RFC", "CURP", "NOMBRE"}) String target,
+                                                  @RequestHeader String targetValue) {
+        return new WebServiceResponse(empleadoService.getEmployeesByTarget(target,targetValue));
+    }
 
     @PostMapping("")
     @Operation(summary = "create a new employee in RH")

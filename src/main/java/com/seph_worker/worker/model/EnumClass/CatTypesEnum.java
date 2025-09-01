@@ -14,11 +14,12 @@ public enum CatTypesEnum {
     SEXO("cat_sexo"),
     ESTADO_CIVIL("cat_estado_civil"),
     NIVEL_ACADEMICO("cat_nivel_academico"),
-    TIPO_CONTRATCION("cat_tipo_contratcion"),
+    TIPO_CONTRATCION("cat_tipo_contratacion"),
     REGIMEN("cat_regimen"),
     DOCUMENTOS("cat_documentos"),
     CLABES("cat_clabes"),
     TIPO_DOMICILIO("cat_tipo_domicilio"),
+    CAT_CCT("cat_cct"),
     BANCOS("cat_bancos");
 
     public static final Map<String, CatTypesEnum> BY_NAME = new HashMap<>();

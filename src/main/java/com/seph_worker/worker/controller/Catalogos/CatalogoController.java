@@ -27,10 +27,11 @@ public class CatalogoController {
     @Operation(summary = "get a dinamic catalog")
     public WebServiceResponse createEmployee(@PathVariable @Schema(allowableValues =
                                             {"sexo", "estado_civil", "nivel_academico", "tipo_contratcion",
-                                            "regimen", "documentos", "clabes", "tipo_domicilio", "bancos"}) String catalogoType,
+                                            "regimen", "documentos", "clabes", "tipo_domicilio", "bancos","cat_cct"}) String catalogoType,
                                              @RequestHeader (required = false) String whereCondition,
-                                             @RequestHeader (required = false) Object typeCondition) {
-        return new WebServiceResponse(catalogoService.getCatalogoType(CatTypesEnum.from(catalogoType),whereCondition, typeCondition));
+                                             @RequestHeader (required = false) String typeCondition,
+                                             @RequestHeader (required = false) Boolean isDeleted) {
+        return new WebServiceResponse(catalogoService.getCatalogoType(CatTypesEnum.from(catalogoType),whereCondition, typeCondition,isDeleted));
     }
 
 

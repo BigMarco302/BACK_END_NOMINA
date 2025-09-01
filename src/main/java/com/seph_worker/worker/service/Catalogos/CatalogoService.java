@@ -13,19 +13,10 @@ public class CatalogoService {
     private final CatTypeDAO catTypeDAO;
     private final com.seph_worker.worker.core.dto.toCaseString toCaseString;
 
-    public Object getCatalogoType(CatTypesEnum catType, String whereCondition, Object typeCondition) {
+    public Object getCatalogoType(CatTypesEnum catType, String whereCondition, String typeCondition, Boolean isDeleted) {
         String typeConditionString = null;
         Integer typeConditionInteger = null;
 
-        if (typeCondition instanceof String s) {
-            try {
-                typeConditionInteger = Integer.valueOf(s);
-            } catch (NumberFormatException e) {
-                typeConditionString = s;
-            }
-        } else if (typeCondition instanceof Number n) {
-            typeConditionInteger = n.intValue();
-        }
-        return catTypeDAO.getCatType(catType,toCaseString.toSnakeCase(whereCondition),typeConditionString ,typeConditionInteger);
+        return catTypeDAO.getCatType(catType,toCaseString.toSnakeCase(whereCondition),typeCondition,isDeleted);
     }
 }

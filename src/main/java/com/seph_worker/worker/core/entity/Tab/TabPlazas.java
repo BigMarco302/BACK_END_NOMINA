@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -20,8 +22,8 @@ public class TabPlazas extends AuditEntityN1 {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "plaza", length = 24, nullable = false)
-    private String plaza;
+    @Column(name = "cve_plaza", length = 24, nullable = false)
+    private String cvePlaza;
 
     @Column(name = "cod_pago", length = 2, nullable = false)
     private String codPago;
@@ -51,7 +53,7 @@ public class TabPlazas extends AuditEntityN1 {
     private String folio;
 
     @Column(name = "fecha_folio", nullable = false)
-    private java.time.LocalDateTime fechaFolio;
+    private LocalDateTime fechaFolio;
 
     @Column(name = "cat_cct_id", nullable = false)
     private Integer catCctId;

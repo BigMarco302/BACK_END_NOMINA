@@ -80,7 +80,7 @@ public class TabEmpleado extends AuditEntityN1 {
     @Column(name = "cat_tipo_contratacion_id")
     private Integer catTipoContratacionId;
 
-    @Column(name = "nivel_academico_id")
+    @Column(name = "cat_nivel_academico_id")
     private Integer nivelAcademicoId;
 
 
@@ -105,7 +105,7 @@ public class TabEmpleado extends AuditEntityN1 {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nivel_academico_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "cat_nivel_academico_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CatNivelAcademico catNivelAcademico;
 
     @JsonIgnore
