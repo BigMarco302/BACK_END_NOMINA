@@ -18,7 +18,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/notifications")
 @Tag(name="Notifications", description = "/notifications")
-
 public class NotificationsController {
 
     private final NotificationsService notificationsService;

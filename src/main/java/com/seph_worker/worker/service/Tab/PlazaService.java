@@ -11,12 +11,18 @@ import com.seph_worker.worker.model.PlazaExelDTO;
 import com.seph_worker.worker.repository.Catalogos.CatCctRepository;
 import com.seph_worker.worker.repository.Tab.TabPlazasRepository;
 import com.seph_worker.worker.repository.fone.FoneAnaliticoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.beans.Transient;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -31,28 +37,41 @@ public class PlazaService {
         return tabPlazasRepository.findPlazaByTarget(target, ("%" + targetValue + "%"));
     }
 
+    @Transactional
     public WebServiceResponse addPlazaInAnalitico(MultipartFile file, String folio, String accion) {
         List<PlazaExelDTO> list = null;
         try {
             list = excelParserService.parseExcelToDTO(file, PlazaExelDTO.class);
-
+            Set<String> plazasExistentes = new HashSet<String>();
+            Set<String> plazasNoEncontradas = new HashSet<String>();
 
             switch (accion) {
                 case "alta": {
                     list.forEach(plazaExelDTO -> {
-                        TabPlazas tabPlazas = new TabPlazas();
-                        createFormatPlaza(tabPlazas, folio, plazaExelDTO, true);
-                        tabPlazasRepository.save(tabPlazas);
+
+                        tabPlazasRepository.findPlazaByPlaza(plazaExelDTO.getCodigoPlaza().replace(" ", ""))
+                                .ifPresentOrElse(plaza -> {
+                                    plazasExistentes.add(plazaExelDTO.getCodigoPlaza());
+                                }, () -> {
+                                    plazasNoEncontradas.add(plazaExelDTO.getCodigoPlaza());
+                                    TabPlazas tabPlazas = new TabPlazas();
+                                    tabPlazas.setTsCreated(new Timestamp(System.currentTimeMillis()));
+                                    createFormatPlaza(tabPlazas, folio, plazaExelDTO, true);
+                                    tabPlazasRepository.save(tabPlazas);
+                                });
                     });
-                    return new WebServiceResponse(true, "Se agregaron correctamente las plazas");
+                    return new WebServiceResponse(true, "Se agregaron correctamente las plazas", Map.of("plazasYaExistentes", plazasExistentes,"plazasAgregadas",plazasNoEncontradas));
                 }
                 case "baja": {
                     list.forEach(plazaExelDTO -> {
-                        TabPlazas tabPlazas = tabPlazasRepository.findPlazaByPlaza(plazaExelDTO.getCodigoPlaza().replace(" ", ""));
-                        createFormatPlaza(tabPlazas, folio, plazaExelDTO, true);
-                        tabPlazasRepository.save(tabPlazas);
+                        tabPlazasRepository.findPlazaByPlaza(plazaExelDTO.getCodigoPlaza().replace(" ", ""))
+                                .ifPresentOrElse(plaza -> {
+                                    plazasExistentes.add(plazaExelDTO.getCodigoPlaza());
+                                    createFormatPlaza(plaza, folio, plazaExelDTO, true);
+                                    tabPlazasRepository.save(plaza);
+                                }, () -> plazasNoEncontradas.add(plazaExelDTO.getCodigoPlaza()));
                     });
-                    return new WebServiceResponse(true, "Se actualizaron correctamente las plazas");
+                    return new WebServiceResponse(true, "Se actualizaron correctamente las plazas", Map.of("plazasNoEncontradas", plazasNoEncontradas,"plazasActualizadas",plazasExistentes));
                 }
                 default:
                     throw new ResourceNotFoundException("No se encontro la accion");
@@ -63,11 +82,10 @@ public class PlazaService {
     }
 
     public WebServiceResponse createNewPlazaAnalitico(MultipartFile file) {
-       // List<FoneAnalitico> list = excelParserService.parseExcelToDTO(file, FoneAnalitico.class);
         List<FoneAnalitico> list = excelParserService.parseExcelToDTO(file, FoneAnalitico.class);
 
-//        foneAnaliticoRepository.deleteAllInBatch();
-//        foneAnaliticoRepository.saveAll(list);
+        foneAnaliticoRepository.deleteAllInBatch();
+        foneAnaliticoRepository.saveAll(list);
 
         return new WebServiceResponse(true, "Se registró correctamente la plaza", list);
     }
@@ -96,10 +114,11 @@ public class PlazaService {
         plaza.setQnaFin(!isAlta ? quincena : 99999);
         plaza.setFolio(folio);
 
-         CatCct cct = catCctRepository.findByCveCt(plazaExelDTO.getCct().trim())
-                        .orElseThrow(()-> new ResourceNotFoundException("No se encontro el centro de trabajo: "+plazaExelDTO.getCct()));
-
-        plaza.setCatCctId(cct.getId());
+//        CatCct cct = catCctRepository.findByCveCt(plazaExelDTO.getCct().trim())
+//                .orElseThrow(() -> new ResourceNotFoundException("No se encontro el centro de trabajo: " + plazaExelDTO.getCct()));
+//
+        //plaza.setCatCctId(cct.getId());
+        plaza.setCatCctId(1);
         plaza.setFechaFolio(plazaExelDTO.getFecha().atStartOfDay());
         plaza.setCatCodigoCreacionId(2);
         plaza.setCatEstatusPlazaId(isAlta ? 2 : 4);

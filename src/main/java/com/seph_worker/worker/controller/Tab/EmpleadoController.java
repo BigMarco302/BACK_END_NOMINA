@@ -23,7 +23,7 @@ public class EmpleadoController {
     private final EmpleadoService empleadoService;
     private final SessionUser sessionUser;
 
-        @GetMapping("/By/{target}")
+        @GetMapping("/by/{target}")
     @Operation(summary = "Get alls employees base")
     public WebServiceResponse getEmployeesByTarget(@PathVariable @Schema(allowableValues = {"RFC", "CURP", "NOMBRE"}) String target,
                                                   @RequestHeader String targetValue) {

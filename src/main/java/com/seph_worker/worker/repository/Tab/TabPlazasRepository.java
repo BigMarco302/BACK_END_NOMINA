@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TabPlazasRepository extends JpaRepository<TabPlazas,Integer> {
@@ -27,5 +29,5 @@ public interface TabPlazasRepository extends JpaRepository<TabPlazas,Integer> {
         FROM tab_plazas p
         WHERE REPLACE(p.cve_plaza, ' ', '') = :plaza
         """, nativeQuery = true)
-    TabPlazas findPlazaByPlaza(String plaza);
+    Optional<TabPlazas> findPlazaByPlaza(String plaza);
 }
