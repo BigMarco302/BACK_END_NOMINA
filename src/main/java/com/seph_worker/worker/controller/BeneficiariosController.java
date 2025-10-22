@@ -4,6 +4,7 @@ package com.seph_worker.worker.controller;
 import com.seph_worker.worker.core.dto.SessionUser;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 import com.seph_worker.worker.model.BeneficiarioDTO;
+import com.seph_worker.worker.model.BeneficiariosAlimDTO;
 import com.seph_worker.worker.service.BeneficiariosService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,23 @@ public class BeneficiariosController {
     @GetMapping("")
     public WebServiceResponse getAllBene() {
         return new WebServiceResponse(beneficiariosService.getAllBene());
+    }
+
+
+    //-----------
+        @PostMapping("/alim")
+    public WebServiceResponse addBeneAlim(@RequestBody BeneficiariosAlimDTO dto) {
+        return beneficiariosService.addNewBeneAlim(dto, sessionUser.getUser());
+    }
+
+    @PatchMapping("/alim/{beneficiarioId}")
+    public WebServiceResponse updateBeneAlim(@RequestBody BeneficiariosAlimDTO dto,
+                                         @PathVariable Integer beneficiarioId) {
+        return beneficiariosService.updateBeneAlim(beneficiarioId, dto, sessionUser.getUser());
+    }
+
+    @DeleteMapping("/alim/{beneficiarioId}")
+    public WebServiceResponse softdeleteBeneAlim(@PathVariable Integer beneficiarioId) {
+        return beneficiariosService.softdeleteBeneAlim(beneficiarioId, sessionUser.getUser());
     }
 }
