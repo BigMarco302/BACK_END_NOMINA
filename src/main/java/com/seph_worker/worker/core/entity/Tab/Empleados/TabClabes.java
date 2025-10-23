@@ -34,7 +34,7 @@ public class TabClabes extends AuditEntityN1 {
     private Integer catBancoId;
 
     @Column(name = "cat_clabe_id", nullable = false)
-    private Integer cat_clabe_id;
+    private Integer catClabeId;
 
     @ManyToOne
     @JoinColumn(name = "cat_banco_id", referencedColumnName = "id", insertable = false, updatable = false)
