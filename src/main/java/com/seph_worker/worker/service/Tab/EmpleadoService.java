@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -30,53 +31,83 @@ public class EmpleadoService {
     private CatSexoRepository catSexoRepository;
     private CatTipoContratacionRepository catTipoContratacionRepository;
 
-    public  List<TabEmpleado> getAllEmployees(int page,int size, Integer catTipoContratacionId){
-        Pageable pages = PageRequest.of(page,size);
-        return tabEmpleadoRepository.findEmpleaados(pages,catTipoContratacionId);
+    public List<TabEmpleado> getAllEmployees(int page, int size, Integer catTipoContratacionId) {
+        Pageable pages = PageRequest.of(page, size);
+        return tabEmpleadoRepository.findEmpleaados(pages, catTipoContratacionId);
     }
 
-    public List<TabEmpleado> getAllEmployeesBase(int page,int size){
-        Pageable pages = PageRequest.of(page,size);
+    public List<TabEmpleado> getAllEmployeesBase(int page, int size) {
+        Pageable pages = PageRequest.of(page, size);
         return tabEmpleadoRepository.findEmpleaadosNotBase(pages);
     }
 
-    public List<TabEmpleado> getEmployeesByTarget(String target, String value){
-        return tabEmpleadoRepository.findEmployeesByTarget(target,("%" + value + "%"));
+    public List<TabEmpleado> getEmployeesByTarget(String target, String value) {
+        return tabEmpleadoRepository.findEmployeesByTarget(target, ("%" + value + "%"));
+    }
+
+    public List<Map<String, Object>> getEmployeesByTargetSearch(String target,
+                                                                String value,
+                                                                String valuePrimer,
+                                                                String valueSegundo) {
+
+        String likeNombre = buildLike(value);
+        String likePrimer = buildLike(valuePrimer);
+        String likeSegundo = buildLike(valueSegundo);
+
+        return tabEmpleadoRepository.findEmployeesByTargetSearch(
+                target,
+                likeNombre,
+                likePrimer,
+                likeSegundo
+        );
+    }
+
+    private String buildLike(String raw) {
+        if (raw == null) {
+            return null;
+        }
+        String trimmed = raw.trim();
+        if (trimmed.isEmpty()) {
+            return null;
+        }
+        // ILIKE ya es case-insensitive; no es obligatorio toUpperCase.
+        return "%" + trimmed.toUpperCase() + "%";
     }
 
     @Transactional
-    public WebServiceResponse updateEmployee(EmployeeDTO dto,Integer employeeId, CoreUser user){
+    public WebServiceResponse updateEmployee(EmployeeDTO dto, Integer employeeId, CoreUser user) {
         TabEmpleado employee = tabEmpleadoRepository.findById(employeeId)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
-        validateIdsByEmployee(dto.getCatSexoId(),dto.getCatEstadoCivilId(),dto.getCatRegimenId(),dto.getCatTipoContratacionId(),dto.getNivelAcademicoId());
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+        validateIdsByEmployee(dto.getCatSexoId(), dto.getCatEstadoCivilId(), dto.getCatRegimenId(), dto.getCatTipoContratacionId(), dto.getNivelAcademicoId());
 
         try {
             PatchUtils.copyNonNullProperties(dto, employee);
             employee.setTsModified(new Timestamp(System.currentTimeMillis()));
             employee.setUsModified(user.getId());
             tabEmpleadoRepository.save(employee);
-            return new WebServiceResponse(true, "Se actualizo correctamente el empleado: "+employee.getNombre()+" "+employee.getSegundoApellido());
+            return new WebServiceResponse(true, "Se actualizo correctamente el empleado: " + employee.getNombre() + " " + employee.getSegundoApellido());
         } catch (Exception e) {
-            throw new RuntimeException("Ocurrio un error al actualizar el empleado: "+e);
+            throw new RuntimeException("Ocurrio un error al actualizar el empleado: " + e);
         }
     }
+
     @Transactional
-    public WebServiceResponse softdeleteEmployee(Integer employeeId, CoreUser user){
+    public WebServiceResponse softdeleteEmployee(Integer employeeId, CoreUser user) {
         TabEmpleado employee = tabEmpleadoRepository.findById(employeeId)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
         try {
             employee.setDeleted(Boolean.TRUE);
             employee.setUsDeleted(user.getId());
             employee.setTsDeleted(new Timestamp(System.currentTimeMillis()));
             tabEmpleadoRepository.save(employee);
-            return new WebServiceResponse(true,"Se elimino correctamente el empleado: "+employee.getNombre()+" "+employee.getSegundoApellido());
+            return new WebServiceResponse(true, "Se elimino correctamente el empleado: " + employee.getNombre() + " " + employee.getSegundoApellido());
         } catch (Exception e) {
-            throw new RuntimeException("Ocurrio un error al eliminar al empleado: +"+e);
+            throw new RuntimeException("Ocurrio un error al eliminar al empleado: +" + e);
         }
     }
 
-    private void validateIdsByEmployee(Integer catSexoId,Integer catEstadoCivilId, Integer catRegimenId , Integer catTipoContratacionId , Integer nivelAcademicoId){
+    private void validateIdsByEmployee(Integer catSexoId, Integer catEstadoCivilId, Integer catRegimenId, Integer catTipoContratacionId, Integer nivelAcademicoId) {
         catEstadoCivilRepository.findById(catEstadoCivilId)
                 .orElseThrow(() -> new ResourceNotFoundException("Estado Civil not found"));
 
@@ -92,10 +123,11 @@ public class EmpleadoService {
         catTipoContratacionRepository.findById(catTipoContratacionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo contratacion not found"));
     }
-    @Transactional
-    public WebServiceResponse createEmployee(EmployeeDTO dto, CoreUser user){
 
-        validateIdsByEmployee(dto.getCatSexoId(),dto.getCatEstadoCivilId(),dto.getCatRegimenId(),dto.getCatTipoContratacionId(),dto.getNivelAcademicoId());
+    @Transactional
+    public WebServiceResponse createEmployee(EmployeeDTO dto, CoreUser user) {
+
+        validateIdsByEmployee(dto.getCatSexoId(), dto.getCatEstadoCivilId(), dto.getCatRegimenId(), dto.getCatTipoContratacionId(), dto.getNivelAcademicoId());
 
         try {
             TabEmpleado em = new TabEmpleado();
@@ -123,9 +155,9 @@ public class EmpleadoService {
             em.setTsCreated(new Timestamp(System.currentTimeMillis()));
             em.setDeleted(Boolean.FALSE);
             tabEmpleadoRepository.save(em);
-            return new WebServiceResponse(true,"Se creo correctamente el empleado: "+em.getNombre()+" "+em.getSegundoApellido());
+            return new WebServiceResponse(true, "Se creo correctamente el empleado: " + em.getNombre() + " " + em.getSegundoApellido());
         } catch (Exception e) {
-            throw new RuntimeException("Ocurrio un error al crear al empleado: "+e);
+            throw new RuntimeException("Ocurrio un error al crear al empleado: " + e);
         }
     }
 }
