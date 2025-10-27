@@ -16,6 +16,7 @@ import org.springframework.web.client.ResourceAccessException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +35,7 @@ public class BeneficiariosService {
         ali.setTsCreated(new Timestamp(System.currentTimeMillis()));
         ali.setUsCreated(user.getId());
         tabBeneficiariosRepository.save(ali);
-        return new WebServiceResponse(true, "Se guardo correctamente el registro");
+        return new WebServiceResponse(true, "Se guardo correctamente el registro", Map.of("id",ali.getId()));
     }
 
     public WebServiceResponse updateBeneAlim(Integer bene, BeneficiariosAlimDTO dto, CoreUser user) {
