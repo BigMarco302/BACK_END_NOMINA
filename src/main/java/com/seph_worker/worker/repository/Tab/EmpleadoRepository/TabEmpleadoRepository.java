@@ -46,26 +46,10 @@ public interface TabEmpleadoRepository extends JpaRepository<TabEmpleado, Intege
     List<TabEmpleado> findEmployeesByTarget(String target, String targetValue);
 
 @Query(value = """
-    SELECT u.id,
-           u.nombre,
-           u.primer_apellido,
-           u.segundo_apellido,
-           u.rfc
-    FROM tab_empleados u
-    WHERE ( :target = 'RFC'              AND CAST(u.rfc AS TEXT) ILIKE :targetValue )
-       OR ( :target = 'CURP'             AND CAST(u.curp AS TEXT) ILIKE :targetValue )
-       OR ( :target = 'PRIMER_APELLIDO'  AND CAST(u.primer_apellido AS TEXT) ILIKE :targetValue )
-       OR ( :target = 'SEGUNDO_APELLIDO' AND CAST(u.segundo_apellido AS TEXT) ILIKE :targetValue )
-       OR (
-            :target = 'NOMBRE'
-        AND CAST(u.nombre AS TEXT) ILIKE COALESCE(:targetValue, CAST(u.nombre AS TEXT))
-        AND CAST(u.primer_apellido AS TEXT) ILIKE COALESCE(:targetValuePrimer, CAST(u.primer_apellido AS TEXT))
-        AND CAST(u.segundo_apellido AS TEXT) ILIKE COALESCE(:targetValueSegundo, CAST(u.segundo_apellido AS TEXT))
-       )
+    SELECT v.id,
+           v.empleado
+    FROM v_empleado v
+    WHERE v.empleado ILIKE :pSearch
 """, nativeQuery = true)
-List<Map<String, Object>> findEmployeesByTargetSearch(
-        @Param("target") String target,
-        @Param("targetValue") String targetValue,
-        @Param("targetValuePrimer") String targetValuePrimer,
-        @Param("targetValueSegundo") String targetValueSegundo);
+List<Map<String, Object>> findEmployeesByTargetSearch(String pSearch);
 }
