@@ -8,6 +8,7 @@ import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.Empleado.EmployeeDTO;
 import com.seph_worker.worker.repository.Catalogos.*;
+import com.seph_worker.worker.repository.DAOS.TabEmpleadoDAO;
 import com.seph_worker.worker.repository.Tab.EmpleadoRepository.TabEmpleadoRepository;
 import lombok.AllArgsConstructor;
 
@@ -30,6 +31,7 @@ public class EmpleadoService {
     private CatRegimenRepository catRegimenRepository;
     private CatSexoRepository catSexoRepository;
     private CatTipoContratacionRepository catTipoContratacionRepository;
+    private TabEmpleadoDAO  tabEmpleadoDAO;
 
     public List<TabEmpleado> getAllEmployees(int page, int size, Integer catTipoContratacionId) {
         Pageable pages = PageRequest.of(page, size);
@@ -45,22 +47,10 @@ public class EmpleadoService {
         return tabEmpleadoRepository.findEmployeesByTarget(target, ("%" + value + "%"));
     }
 
-    public List<Map<String, Object>> getEmployeesByTargetSearch(String target,
-                                                                String value,
-                                                                String valuePrimer,
-                                                                String valueSegundo) {
+        public List<Map<String, Object>> getEmployeesByTargetSearch(String search) {
+            return tabEmpleadoDAO.getEmployeesByTargetSearch(search);
+        }
 
-        String likeNombre = buildLike(value);
-        String likePrimer = buildLike(valuePrimer);
-        String likeSegundo = buildLike(valueSegundo);
-
-        return tabEmpleadoRepository.findEmployeesByTargetSearch(
-                target,
-                likeNombre,
-                likePrimer,
-                likeSegundo
-        );
-    }
 
     private String buildLike(String raw) {
         if (raw == null) {

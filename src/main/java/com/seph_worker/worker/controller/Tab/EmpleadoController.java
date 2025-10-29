@@ -30,13 +30,10 @@ public class EmpleadoController {
         return new WebServiceResponse(empleadoService.getEmployeesByTarget(target,targetValue));
     }
 
-            @GetMapping("/by/{target}/search")
+            @GetMapping("/by/{search}/search")
     @Operation(summary = "Get alls employees base")
-    public WebServiceResponse getEmployeesByTargetSearch(@PathVariable @Schema(allowableValues = {"RFC", "CURP", "NOMBRE"}) String target,
-                                                  @RequestHeader String targetValue,
-                                                  @RequestHeader(required = false) String targetValuePrimer,
-                                                  @RequestHeader(required = false) String targetValueSegundo) {
-        return new WebServiceResponse(empleadoService.getEmployeesByTargetSearch(target,targetValue,targetValuePrimer,targetValueSegundo));
+    public WebServiceResponse getEmployeesByTargetSearch(@PathVariable String search) {
+        return new WebServiceResponse(empleadoService.getEmployeesByTargetSearch(search));
     }
 
     @PostMapping("")

@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Log4j2
@@ -24,6 +27,7 @@ public class BeneficiariosController {
 
     @PostMapping("")
     public WebServiceResponse addBene(@RequestBody BeneficiarioDTO dto) {
+
         return beneficiariosService.addNewBene(dto, sessionUser.getUser());
     }
 
@@ -50,7 +54,7 @@ public class BeneficiariosController {
 
 
     //-----------
-        @PostMapping("/alim")
+    @PostMapping("/alim")
     public WebServiceResponse addBeneAlim(@RequestBody BeneficiariosAlimDTO dto) {
         return beneficiariosService.addNewBeneAlim(dto, sessionUser.getUser());
     }
