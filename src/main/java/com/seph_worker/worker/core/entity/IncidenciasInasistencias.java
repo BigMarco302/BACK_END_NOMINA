@@ -1,6 +1,7 @@
 package com.seph_worker.worker.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seph_worker.worker.core.dto.AuditEntityN1;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "incidencias_inasistencias")
-public class IncidenciasInasistencias {
+public class IncidenciasInasistencias extends AuditEntityN1 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
