@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_plazas")
+@Table(name = "nom_beneficiarios_alim")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Where(clause = "deleted = false")
 public class NomBeneficiariosAlim extends AuditEntityPrincipal {
