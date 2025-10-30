@@ -27,7 +27,6 @@ public class BeneficiariosController {
 
     @PostMapping("")
     public WebServiceResponse addBene(@RequestBody BeneficiarioDTO dto) {
-
         return beneficiariosService.addNewBene(dto, sessionUser.getUser());
     }
 

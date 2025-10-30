@@ -8,15 +8,13 @@ import java.time.LocalDate;
 
 @Data
 public class BeneficiarioDTO {
-
     private Integer tabEmpleadosId;
     private Integer tabBeneficiariosAlimId;
-    private Integer catCctId;
     private Character formaAplicacion;
     private BigDecimal factorImporte;
     private Integer numeroBenef;
     private Integer qnaini;
     private Integer qnafin;
     private String numeroDocumento;
-    private LocalDate fechaDocumento;
+
 }

@@ -66,14 +66,12 @@ public class BeneficiariosService {
         NomBeneficiariosAlim ali = new NomBeneficiariosAlim();
         ali.setTabEmpleadosId(dto.getTabEmpleadosId());
         ali.setTabBeneficiariosAlimId(dto.getTabBeneficiariosAlimId());
-        ali.setCatCctId(dto.getCatCctId());
         ali.setFormaAplicacion(dto.getFormaAplicacion());
         ali.setFactorImporte(dto.getFactorImporte());
         ali.setNumeroBenef(dto.getNumeroBenef());
         ali.setQnaini(dto.getQnaini());
         ali.setQnafin(dto.getQnafin());
         ali.setNumeroDocumento(dto.getNumeroDocumento());
-        ali.setFechaDocumento(dto.getFechaDocumento());
         ali.setTsCreated(new Timestamp(System.currentTimeMillis()));
         ali.setUsCreated(user.getId());
         beneficiariosRepository.save(ali);

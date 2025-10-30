@@ -22,8 +22,8 @@ public class CatClabe extends AuditEntityN2 {
     private Integer id;
 
     @Column(name = "nombre", nullable = false)
-    private Integer nombre;
+    private String nombre;
 
     @Column(name = "descripcion")
-    private Integer descripcion;
+    private String descripcion;
 }

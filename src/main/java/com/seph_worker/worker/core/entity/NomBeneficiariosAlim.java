@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_plazas")
+@Table(name = "nom_beneficiarios_alim")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Where(clause = "deleted = false")
 public class NomBeneficiariosAlim extends AuditEntityPrincipal {
@@ -28,8 +28,6 @@ public class NomBeneficiariosAlim extends AuditEntityPrincipal {
     @Column(name = "tab_beneficiarios_alim_id")
     private Integer tabBeneficiariosAlimId;
 
-    @Column(name = "cat_cct_id")
-    private Integer catCctId;
 
     @Column(name = "forma_aplicacion")
     private Character formaAplicacion;
@@ -49,6 +47,4 @@ public class NomBeneficiariosAlim extends AuditEntityPrincipal {
     @Column(name = "numero_documento")
     private String numeroDocumento;
 
-    @Column(name = "fecha_documento")
-    private LocalDate fechaDocumento;
 }
