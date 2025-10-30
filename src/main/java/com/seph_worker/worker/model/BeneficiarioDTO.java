@@ -16,4 +16,5 @@ public class BeneficiarioDTO {
     private Integer qnaini;
     private Integer qnafin;
     private String numeroDocumento;
+
 }
