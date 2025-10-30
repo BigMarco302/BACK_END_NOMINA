@@ -2,6 +2,8 @@ package com.seph_worker.worker.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.TabPlazas;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,9 +43,9 @@ public class IncidenciasInasistencias extends AuditEntityN1 {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tab_empleados_id", referencedColumnName = ("id"), updatable = false, insertable = false)
-    private Long tabEmpleadosId;
+    private TabEmpleado tabEmpleado;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tab_plazas_id", referencedColumnName = "id", updatable = false, insertable = false)
-    private Long tabPlazasId;
+    private TabPlazas tabPlazas;
 }

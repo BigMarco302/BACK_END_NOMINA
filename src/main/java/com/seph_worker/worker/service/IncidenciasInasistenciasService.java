@@ -4,6 +4,8 @@ import com.seph_worker.worker.core.dto.PatchUtils;
 import com.seph_worker.worker.core.dto.WebServiceResponse;
 import com.seph_worker.worker.core.entity.Core.RoleModuleUser.CoreUser;
 import com.seph_worker.worker.core.entity.IncidenciasInasistencias;
+import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
+import com.seph_worker.worker.core.entity.Tab.TabPlazas;
 import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.IncidenciasInasistenciasDTO;
 import com.seph_worker.worker.repository.IncidenciasInasistenciasRepository;
@@ -51,8 +53,12 @@ public class IncidenciasInasistenciasService {
         incidencias.setFechaInasistencia(dto.getFechaInasistencia());
         incidencias.setTipoInasistencia(dto.getTipoInasistencia());
         incidencias.setHorasInasistencia(dto.getHorasInasistencia());
-        incidencias.setTabEmpleadosId(dto.getTabEmpleadosId());
-        incidencias.setTabPlazasId(dto.getTabPlazasId());
+        TabEmpleado empleado = tabEmpleadoRepository.findById(Math.toIntExact(dto.getTabEmpleadosId()))
+                .orElseThrow(() -> new ResourceNotFoundException("número de empleado no encontrado"));
+        incidencias.setTabEmpleado(empleado);
+        TabPlazas plaza = tabPlazasRepository.findById(Math.toIntExact(dto.getTabPlazasId()))
+                .orElseThrow(() -> new ResourceNotFoundException("Plaza no encontrada"));
+        incidencias.setTabPlazas(plaza);
         incidencias.setDeleted(false);
         incidencias.setUsCreated(user.getId());
         incidencias.setTsCreated(new Timestamp(System.currentTimeMillis()));
