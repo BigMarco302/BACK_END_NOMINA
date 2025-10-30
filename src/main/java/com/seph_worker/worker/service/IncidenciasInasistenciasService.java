@@ -8,6 +8,7 @@ import com.seph_worker.worker.core.exception.ResourceNotFoundException;
 import com.seph_worker.worker.model.IncidenciasInasistenciasDTO;
 import com.seph_worker.worker.repository.IncidenciasInasistenciasRepository;
 import com.seph_worker.worker.repository.Tab.EmpleadoRepository.TabEmpleadoRepository;
+import com.seph_worker.worker.repository.Tab.TabPlazasRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import java.util.Map;
 @AllArgsConstructor
 public class IncidenciasInasistenciasService {
     private final IncidenciasInasistenciasRepository incidenciasInasistenciasRepository;
+    private final TabEmpleadoRepository tabEmpleadoRepository;
+    private final TabPlazasRepository tabPlazasRepository;
 
     @Transactional
     public void incidencias(IncidenciasInasistenciasDTO dto, Integer id){
@@ -29,10 +32,17 @@ public class IncidenciasInasistenciasService {
         PatchUtils.copyNonNullProperties(dto,incidencias);
         incidencias.setTsModified(Timestamp.valueOf(LocalDateTime.now()));
                 incidenciasInasistenciasRepository.save(incidencias);
-
     }
     @Transactional
     public WebServiceResponse addIncidencia(IncidenciasInasistenciasDTO dto, CoreUser user) {
+
+        tabEmpleadoRepository.findById(Math.toIntExact(dto.getTabEmpleadosId()))
+                .orElseThrow(()-> new ResourceNotFoundException("No se encontró el empleado: "+dto.getTabEmpleadosId()));
+
+        tabPlazasRepository.findById(Math.toIntExact(dto.getTabPlazasId()))
+                .orElseThrow(()-> new ResourceNotFoundException(("No se encontró la plaza: "+dto.getTabPlazasId())));
+
+
 
         IncidenciasInasistencias incidencias = new IncidenciasInasistencias();
         incidencias.setFolio(dto.getFolio());

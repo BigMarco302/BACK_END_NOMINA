@@ -40,11 +40,10 @@ public class IncidenciasInasistencias extends AuditEntityN1 {
     private Integer horasInasistencia;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Column(name = "tab_empleados_id", nullable = false)
+    @JoinColumn(name = "tab_empleados_id", referencedColumnName = ("id"), updatable = false, insertable = false)
     private Long tabEmpleadosId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Column(name = "tab_plazas_id", nullable = false)
+    @JoinColumn(name = "tab_plazas_id", referencedColumnName = "id", updatable = false, insertable = false)
     private Long tabPlazasId;
-
 }
