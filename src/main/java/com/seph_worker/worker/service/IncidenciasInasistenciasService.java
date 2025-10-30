@@ -24,12 +24,12 @@ public class IncidenciasInasistenciasService {
     private final TabEmpleadoRepository tabEmpleadoRepository;
 
     @Transactional
-    public void hola(IncidenciasInasistenciasDTO dto, Integer id){
-//           IncidenciasInasistencias hola = incidenciasInasistenciasRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Incidencia no encontrada"));
-//        PatchUtils.copyNonNullProperties(dto,hola);
-//        hola.setTsModified(Timestamp.valueOf(LocalDateTime.now()));
-//                incidenciasInasistenciasRepository.save(hola);
+    public void incidencias(IncidenciasInasistenciasDTO dto, Integer id){
+           IncidenciasInasistencias incidencias = incidenciasInasistenciasRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Incidencia no encontrada"));
+        PatchUtils.copyNonNullProperties(dto,incidencias);
+        incidencias.setTsModified(Timestamp.valueOf(LocalDateTime.now()));
+                incidenciasInasistenciasRepository.save(incidencias);
 
     }
     @Transactional
@@ -69,7 +69,7 @@ public class IncidenciasInasistenciasService {
     }
 
     @Transactional
-    public WebServiceResponse deleteIncidencia(Long id, CoreUser user) {
+    public WebServiceResponse deleteIncidencia(Integer id, CoreUser user) {
         IncidenciasInasistencias hola = incidenciasInasistenciasRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Incidencia no encontrada"));
 
@@ -78,6 +78,7 @@ public class IncidenciasInasistenciasService {
         hola.setTsDeleted(new Timestamp(System.currentTimeMillis()));
         incidenciasInasistenciasRepository.save(hola);
 
+        //metodo java puro, se puede mejorar
 //        int updated = incidenciasInasistenciasRepository.softDelete(id, user.getId());
 //        if (updated == 0) {
 //            throw new IllegalArgumentException("No se encontro el inasistencia");

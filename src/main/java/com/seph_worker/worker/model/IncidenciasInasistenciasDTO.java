@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class IncidenciasInasistenciasDTO {
 
-    private Long id;
+    private Integer id;
     private Long folio;
     private Integer ejercicio;
     private Integer qnaProceso;
@@ -18,11 +18,4 @@ public class IncidenciasInasistenciasDTO {
     private Long tabEmpleadosId;
     private Long tabPlazasId;
 
-    private Integer usCreated;
-    private Timestamp tsCreated;
-    private Integer usModified;
-    private Timestamp tsModified;
-    private Integer usDeleted;
-    private Timestamp tsDeleted;
-    private Boolean deleted;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface IncidenciasInasistenciasRepository extends JpaRepository<IncidenciasInasistencias, Long> {
+public interface IncidenciasInasistenciasRepository extends JpaRepository<IncidenciasInasistencias, Integer> {
 
     @Query(value = """
         SELECT *
@@ -40,7 +40,7 @@ public interface IncidenciasInasistenciasRepository extends JpaRepository<Incide
         WHERE (deleted = FALSE OR deleted IS NULL)
           AND id = :id
         """, nativeQuery = true)
-    Map<String, Object> findFlatById(@Param("id") Long id);
+    Map<String, Object> findFlatById(@Param("id") Integer id);
 
     @Modifying
     @Query(value = """
@@ -50,5 +50,5 @@ public interface IncidenciasInasistenciasRepository extends JpaRepository<Incide
             ts_deleted = NOW()
         WHERE id = :id
         """, nativeQuery = true)
-    int softDelete(@Param("id") Long id, @Param("usuario") Integer usuario);
+    int softDelete(@Param("id") Integer id, @Param("usuario") Integer usuario);
 }

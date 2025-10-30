@@ -18,52 +18,31 @@ public class IncidenciasInasistencias extends AuditEntityN1 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-    @Column(name = "folio")
+    @Column(name = "folio", nullable = false, length = 100)
     private Long folio;
 
-    @Column(name = "ejercicio")
+    @Column(name = "ejercicio", nullable = false)
     private Integer ejercicio;
 
-    @Column(name = "qna_proceso")
+    @Column(name = "qna_proceso", nullable = false)
     private Integer qnaProceso;
 
-    @Column(name = "fecha_inasistencia")
+    @Column(name = "fecha_inasistencia", nullable = false)
     private LocalDate fechaInasistencia;
 
     @Column(name = "tipo_inasistencia", length = 1)
     private String tipoInasistencia;
 
-    @Column(name = "horas_inasistencia")
+    @Column(name = "horas_inasistencia", nullable = false)
     private Integer horasInasistencia;
 
-    @Column(name = "tab_empleados_id")
+    @Column(name = "tab_empleados_id", nullable = false)
     private Long tabEmpleadosId;
 
-    @Column(name = "tab_plazas_id")
+    @Column(name = "tab_plazas_id", nullable = false)
     private Long tabPlazasId;
-
-    @Column(name = "us_created")
-    private Integer usCreated;
-
-    @Column(name = "ts_created")
-    private Timestamp tsCreated;
-
-    @Column(name = "us_modified")
-    private Integer usModified;
-
-    @Column(name = "ts_modified")
-    private Timestamp tsModified;
-
-    @Column(name = "us_deleted")
-    private Integer usDeleted;
-
-    @Column(name = "ts_deleted")
-    private Timestamp tsDeleted;
-
-    @Column(name = "deleted")
-    private Boolean deleted;
 
 }
