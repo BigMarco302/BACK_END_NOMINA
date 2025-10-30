@@ -20,7 +20,7 @@ public class CatBanco extends AuditEntityN2 {
     private Integer id;
 
     @Column(name = "cve_banco", nullable = false)
-    private String cveBanco;
+    private Integer cveBanco;
 
     @Column(name = "banco")
     private String banco;
