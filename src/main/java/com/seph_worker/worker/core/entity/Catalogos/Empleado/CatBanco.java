@@ -11,7 +11,7 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Entity
-@Table(name = "cat_banco")
+@Table(name = "cat_bancos")
 @Where(clause = "deleted = false")
 public class CatBanco extends AuditEntityN2 {
     @Id
