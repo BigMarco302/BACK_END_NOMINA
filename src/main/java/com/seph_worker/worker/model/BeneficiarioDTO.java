@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Data
 public class BeneficiarioDTO {
-
     private Integer tabEmpleadosId;
     private Integer tabBeneficiariosAlimId;
     private Character formaAplicacion;
