@@ -72,7 +72,6 @@ public class BeneficiariosService {
         ali.setQnaini(dto.getQnaini());
         ali.setQnafin(dto.getQnafin());
         ali.setNumeroDocumento(dto.getNumeroDocumento());
-        ali.setFechaDocumento(dto.getFechaDocumento());
         ali.setTsCreated(new Timestamp(System.currentTimeMillis()));
         ali.setUsCreated(user.getId());
         beneficiariosRepository.save(ali);

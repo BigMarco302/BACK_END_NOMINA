@@ -47,6 +47,4 @@ public class NomBeneficiariosAlim extends AuditEntityPrincipal {
     @Column(name = "numero_documento")
     private String numeroDocumento;
 
-    @Column(name = "fecha_documento")
-    private LocalDate fechaDocumento;
 }
