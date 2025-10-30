@@ -66,7 +66,6 @@ public class BeneficiariosService {
         NomBeneficiariosAlim ali = new NomBeneficiariosAlim();
         ali.setTabEmpleadosId(dto.getTabEmpleadosId());
         ali.setTabBeneficiariosAlimId(dto.getTabBeneficiariosAlimId());
-        ali.setCatCctId(dto.getCatCctId());
         ali.setFormaAplicacion(dto.getFormaAplicacion());
         ali.setFactorImporte(dto.getFactorImporte());
         ali.setNumeroBenef(dto.getNumeroBenef());

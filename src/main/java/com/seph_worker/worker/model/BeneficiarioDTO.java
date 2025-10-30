@@ -11,7 +11,6 @@ public class BeneficiarioDTO {
 
     private Integer tabEmpleadosId;
     private Integer tabBeneficiariosAlimId;
-    private Integer catCctId;
     private Character formaAplicacion;
     private BigDecimal factorImporte;
     private Integer numeroBenef;

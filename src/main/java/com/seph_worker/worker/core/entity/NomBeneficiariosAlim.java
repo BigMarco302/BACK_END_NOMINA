@@ -28,8 +28,6 @@ public class NomBeneficiariosAlim extends AuditEntityPrincipal {
     @Column(name = "tab_beneficiarios_alim_id")
     private Integer tabBeneficiariosAlimId;
 
-    @Column(name = "cat_cct_id")
-    private Integer catCctId;
 
     @Column(name = "forma_aplicacion")
     private Character formaAplicacion;
