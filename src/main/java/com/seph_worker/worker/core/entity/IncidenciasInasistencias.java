@@ -1,5 +1,6 @@
 package com.seph_worker.worker.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seph_worker.worker.core.dto.AuditEntityN1;
 import com.seph_worker.worker.core.entity.Tab.Empleados.TabEmpleado;
@@ -8,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -41,11 +41,19 @@ public class IncidenciasInasistencias extends AuditEntityN1 {
     @Column(name = "horas_inasistencia", nullable = false)
     private Integer horasInasistencia;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tab_empleados_id", referencedColumnName = ("id"), updatable = false, insertable = false)
+    @Column(name = "tab_empleados_id", nullable = false)
+    private Long tabEmpleadoId;
+
+    @Column(name = "tab_plazas_id", nullable = false)
+    private Long tabPlazasId;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tab_empleados_id", referencedColumnName = "id", insertable = false, updatable = false)
     private TabEmpleado tabEmpleado;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tab_plazas_id", referencedColumnName = "id", updatable = false, insertable = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tab_plazas_id", referencedColumnName = "id", insertable = false, updatable = false)
     private TabPlazas tabPlazas;
 }

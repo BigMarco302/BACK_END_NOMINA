@@ -38,13 +38,13 @@ public class IncidenciasInasistenciasService {
     @Transactional
     public WebServiceResponse addIncidencia(IncidenciasInasistenciasDTO dto, CoreUser user) {
 
-        tabEmpleadoRepository.findById(Math.toIntExact(dto.getTabEmpleadosId()))
-                .orElseThrow(()-> new ResourceNotFoundException("No se encontró el empleado: "+dto.getTabEmpleadosId()));
+        if (!tabEmpleadoRepository.existsById(Math.toIntExact(dto.getTabEmpleadosId()))) {
+            throw new ResourceNotFoundException("No se encontró el empleado: " + dto.getTabEmpleadosId());
+        }
 
-        tabPlazasRepository.findById(Math.toIntExact(dto.getTabPlazasId()))
-                .orElseThrow(()-> new ResourceNotFoundException(("No se encontró la plaza: "+dto.getTabPlazasId())));
-
-
+        if (!tabPlazasRepository.existsById(Math.toIntExact(dto.getTabPlazasId()))) {
+            throw new ResourceNotFoundException("No se encontró la plaza: " + dto.getTabPlazasId());
+        }
 
         IncidenciasInasistencias incidencias = new IncidenciasInasistencias();
         incidencias.setFolio(dto.getFolio());
@@ -53,13 +53,9 @@ public class IncidenciasInasistenciasService {
         incidencias.setFechaInasistencia(dto.getFechaInasistencia());
         incidencias.setTipoInasistencia(dto.getTipoInasistencia());
         incidencias.setHorasInasistencia(dto.getHorasInasistencia());
-        TabEmpleado empleado = tabEmpleadoRepository.findById(Math.toIntExact(dto.getTabEmpleadosId()))
-                .orElseThrow(() -> new ResourceNotFoundException("número de empleado no encontrado"));
-        incidencias.setTabEmpleado(empleado);
-        TabPlazas plaza = tabPlazasRepository.findById(Math.toIntExact(dto.getTabPlazasId()))
-                .orElseThrow(() -> new ResourceNotFoundException("Plaza no encontrada"));
-        incidencias.setTabPlazas(plaza);
         incidencias.setDeleted(false);
+        incidencias.setTabEmpleadoId(dto.getTabEmpleadosId());
+        incidencias.setTabPlazasId(dto.getTabPlazasId());
         incidencias.setUsCreated(user.getId());
         incidencias.setTsCreated(new Timestamp(System.currentTimeMillis()));
         incidenciasInasistenciasRepository.save(incidencias);
