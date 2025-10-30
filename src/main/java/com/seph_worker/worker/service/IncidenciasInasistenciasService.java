@@ -21,7 +21,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class IncidenciasInasistenciasService {
     private final IncidenciasInasistenciasRepository incidenciasInasistenciasRepository;
-    private final TabEmpleadoRepository tabEmpleadoRepository;
 
     @Transactional
     public void incidencias(IncidenciasInasistenciasDTO dto, Integer id){
@@ -34,13 +33,6 @@ public class IncidenciasInasistenciasService {
     }
     @Transactional
     public WebServiceResponse addIncidencia(IncidenciasInasistenciasDTO dto, CoreUser user) {
-//
-//        tabEmpleadoRepository.findById(dto.getTabEmpleadosId())
-//                .orElseThrow(()-> new ResourceNotFoundException("Empleado no se encontro: "+dto.getTabEmpleadosId()));
-        if (dto.getTabEmpleadosId() == null) throw new IllegalArgumentException("Falta id de empleado");
-        if (dto.getTabPlazasId() == null) throw new IllegalArgumentException("Falta id de plaza");
-        if (dto.getFechaInasistencia() == null) throw new IllegalArgumentException("Falta fecha de inasistencia");
-        if (dto.getTipoInasistencia() == null || dto.getTipoInasistencia().isBlank()) throw new IllegalArgumentException("Falta tipo de inasistencia");
 
         IncidenciasInasistencias incidencias = new IncidenciasInasistencias();
         incidencias.setFolio(dto.getFolio());
@@ -70,19 +62,14 @@ public class IncidenciasInasistenciasService {
 
     @Transactional
     public WebServiceResponse deleteIncidencia(Integer id, CoreUser user) {
-        IncidenciasInasistencias hola = incidenciasInasistenciasRepository.findById(id)
+        IncidenciasInasistencias incidencias = incidenciasInasistenciasRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Incidencia no encontrada"));
 
-        hola.setDeleted(true);
-        hola.setUsDeleted(user.getId());
-        hola.setTsDeleted(new Timestamp(System.currentTimeMillis()));
-        incidenciasInasistenciasRepository.save(hola);
+        incidencias.setDeleted(true);
+        incidencias.setUsDeleted(user.getId());
+        incidencias.setTsDeleted(new Timestamp(System.currentTimeMillis()));
+        incidenciasInasistenciasRepository.save(incidencias);
 
-        //metodo java puro, se puede mejorar
-//        int updated = incidenciasInasistenciasRepository.softDelete(id, user.getId());
-//        if (updated == 0) {
-//            throw new IllegalArgumentException("No se encontro el inasistencia");
-//        }
         return new WebServiceResponse(true, "Inasistencia eliminada", Map.of("id", id));
     }
 

@@ -44,10 +44,10 @@ public class IncidenciasInasistenciasController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{incidenciaId}")
     @Operation(summary = "Eliminar (soft delete) una inasistencia por ID")
-    public WebServiceResponse deleteIncidencia(@PathVariable Integer id){
-        return incidenciasInasistenciasService.deleteIncidencia(id, sessionUser.getUser());
+    public WebServiceResponse deleteIncidencia(@PathVariable("incidenciaId") Integer incidenciaId){
+        return incidenciasInasistenciasService.deleteIncidencia(incidenciaId, sessionUser.getUser());
     }
 
 }
