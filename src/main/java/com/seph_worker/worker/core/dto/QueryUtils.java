@@ -22,7 +22,7 @@ public class QueryUtils {
     public static void setResultTransformerWithJsonObjectAliases(Query query,List<String> jsonObjectAliases) {
         setResultTransformer(query, jsonObjectAliases, Collections.emptyList());
     }
-    private static void setResultTransformer(Query query, List<String> jsonObjectAliases, List<String> excludeColumns) {
+    public static void setResultTransformer(Query query, List<String> jsonObjectAliases, List<String> excludeColumns) {
 
         ((org.hibernate.query.Query) query.unwrap(org.hibernate.query.Query.class))
                 .setTupleTransformer((values, aliases) -> {

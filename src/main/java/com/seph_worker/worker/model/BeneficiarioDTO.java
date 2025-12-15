@@ -10,11 +10,15 @@ import java.time.LocalDate;
 public class BeneficiarioDTO {
     private Integer tabEmpleadosId;
     private Integer tabBeneficiariosAlimId;
-    private Character formaAplicacion;
+    private String formaAplicacion;
     private BigDecimal factorImporte;
     private Integer numeroBenef;
     private Integer qnaini;
     private Integer qnafin;
     private String numeroDocumento;
+
+    public Character getFormaAplicacion(){
+        return formaAplicacion.toCharArray()[0];
+    }
 
 }
