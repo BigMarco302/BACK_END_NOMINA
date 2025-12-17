@@ -15,7 +15,7 @@ public class CalculationService {
     private final CalculationDAO calculationDAO;
 
 
-    public Object getCalculation (Integer qnaProceso, Integer nivelSueldo, List<String> conceptos, Integer empleadoId){
-        return calculationDAO.getCalculation(qnaProceso, nivelSueldo, conceptos, empleadoId);
+    public Object getCalculation (Integer qnaProceso, Integer nivelSueldo, List<String> conceptos, Integer empleadoId, String tipoConcepto) {
+        return calculationDAO.getCalculation(qnaProceso, nivelSueldo, conceptos, empleadoId, tipoConcepto);
     }
 }

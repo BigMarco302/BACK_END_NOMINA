@@ -28,8 +28,9 @@ public class CalculationController {
     public WebServiceResponse getCalculation(@RequestHeader Integer qnaProceso,
                                              @RequestHeader(required = false) Integer nivelSueldo,
                                              @RequestHeader(required = false) List<String> concepto,
-                                             @RequestHeader(required = false) Integer empleadoId) {
-        return new WebServiceResponse(calculationService.getCalculation(qnaProceso, nivelSueldo, concepto,empleadoId));
+                                             @RequestHeader(required = false) Integer empleadoId,
+                                             @RequestHeader(required = false) String tipoConcepto){
+        return new WebServiceResponse(calculationService.getCalculation(qnaProceso, nivelSueldo, concepto,empleadoId, tipoConcepto));
     }
 
 }
